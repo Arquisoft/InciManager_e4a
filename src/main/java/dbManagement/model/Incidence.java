@@ -2,12 +2,17 @@ package dbManagement.model;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import dbManagement.util.Status;
 
 @Entity
@@ -28,6 +33,9 @@ public class Incidence {
 	
 	private Status status;
 	private Date expiration;
+	
+	@OneToMany(mappedBy = "idIncident", cascade = {CascadeType.ALL })	
+	private Set<Asignada> operarios = new HashSet<Asignada>();
 	
 	public Incidence() {
 		
@@ -122,6 +130,14 @@ public class Incidence {
 
 	public void setFields(HashMap<String, String> fields) {
 		this.fields = fields;
+	}
+
+	public Set<Asignada> getOperarios() {
+		return operarios;
+	}
+
+	public void setOperarios(Set<Asignada> operarios) {
+		this.operarios = operarios;
 	}
 
 	@Override
