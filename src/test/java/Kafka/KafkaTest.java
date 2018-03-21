@@ -1,54 +1,42 @@
 package Kafka;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.Assert.assertThat;
 
-import org.junit.After;
-import org.junit.Assert;
+import java.net.URL;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.client.RestTemplate;
+
+@RunWith(SpringJUnit4ClassRunner.class)
 
 
+@SuppressWarnings("deprecation")
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class KafkaTest {
 
-	@Autowired
-	private KafkaProducerImpl producer;
-	
-	private Set<String> expectedMessages;
-	private Set<String> unexpectedMessages;
+    private int port=9092;
 
-	public KafkaTest() {
-		resetMessages();
-	}
+    private URL base;
+	private RestTemplate template;
 
 	@Before
 	public void setUp() throws Exception {
-		Thread.sleep(2000);
-		resetMessages();
+		this.base = new URL("http://localhost:" + port + "/");
+		template = new TestRestTemplate();
 	}
 
-	private void resetMessages() {
-		expectedMessages = Collections
-				.synchronizedSet(new HashSet<>());
-		unexpectedMessages = Collections
-				.synchronizedSet(new HashSet<>());
+	@Test
+	public void getLanding() throws Exception { 
+		ResponseEntity<String> response = template.getForEntity(base.toString(), String.class);
+		assertThat(response.getBody(), containsString("Hola"));
 	}
-
 	
-
-	@KafkaListener(topics = "newVote")
-	public void listen(String message) {
-		if (!expectedMessages.remove(message)) {
-			unexpectedMessages.add(message);
-		}
-	}
+	
 }
