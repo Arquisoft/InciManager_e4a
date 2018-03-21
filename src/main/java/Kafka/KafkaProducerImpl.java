@@ -41,13 +41,12 @@ public class KafkaProducerImpl implements KafkaProducerI {
 		future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
 			@Override
 			public void onSuccess(SendResult<String, String> result) {
-				logger.info("Exito al enviar el mensaje \"" + data + "\" con tipic " + topic);
+				logger.info("Success on sending message \"" + data + "\" to topic " + topic);
 			}
 
 			@Override
 			public void onFailure(Throwable ex) {
-				logger.error(
-						"Error al enviar el mensaje:  \"" + data + "\", stacktrace " + ex.getMessage());
+				logger.error("Error on sending message \"" + data + "\", stacktrace " + ex.getMessage());
 			}
 		});
 	}	
