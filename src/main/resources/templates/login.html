@@ -7,6 +7,7 @@
 <body>
 <h1>Acceso</h1>
 <form method="POST" action="login" >
+<p> Para enviar la incidencia, necesitamos que introduzcas tus datos</p>
 	<table>
 		<tr>
 			<td><label for="login"><strong>Login:</strong> </label></td>
@@ -20,8 +21,13 @@
 			<td><button type="submit" id="login">Entrar</button></td>
 		</tr>
 	</table>
-	<footer th:replace="fragments/footer"/>
+	
 </form>
+<footer class="footer">
+	<div class="container">
+		<span class="text-muted">&copy; ASW - Registrar incidencias</span>
+	</div>
+</footer>
 
 
 
