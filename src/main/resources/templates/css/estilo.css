@@ -1,0 +1,146 @@
+body {
+      font: 400 15px Tahoma, sans-serif;
+      line-height: 1.8;
+      color: #818181;
+      background-color: white;
+  }
+
+/*h1 es descendiente directo de h1*/
+body > h1 {
+      background-color: dodgerblue; 
+      color: #fff;
+      text-transform: uppercase;
+      padding: 30px 10px;
+      text-align: center;   
+  }
+
+body > p{
+    /*Aumentamos la letra y especificamos la familia*/
+    font-family: serif;
+    font-size: 18px;
+}
+
+/*h2 es descendiente directo de h1*/
+/*Se le aplica otro estilo distinto a h1*/
+body > h2 {
+    /*Color del fondo en blanco*/
+      background-color: #f6f6f6; 
+    /*Color del texto en azul*/
+      color: blue;
+    /*Separación del texto con un borde*/
+      border-bottom: 15px;
+    /*Alineamos el texto al centro*/
+      text-align: left;     
+  }
+
+/*Barra de navegación entre paginas*/
+nav {
+    /*Tamaño de la letra al 90%*/
+    font-size: 90%;
+}
+
+nav > ul {
+    background-color: #0022ff;
+    border: 1px solid #0022ff;
+    font-size: 95%;
+}
+
+nav li {
+    color: rgb(100%, 100%, 100%);
+    padding: 0;
+    margin: 0;
+}
+
+/*Aplicamos conjunto de bloque y separaciones*/
+nav a {
+    display: block;
+    padding: 0.4em 1em;
+}
+
+/*Aplicamos el mismo color que al titulo principal cuando pasamos por encima*/
+nav a:hover, nav div:hover {
+	background-color: dodgerblue;
+}
+
+/*Aplicamos color al link*/
+nav a {
+	color: rgb(100%, 100%, 100%);
+	text-decoration: none;
+}
+
+/*Elementos sin odenar de una lista*/
+ul > li{
+    /*Cambiamos el estilo de la letra*/
+    font-style: oblique;
+}
+
+/*Elementos ordenados de una lista*/
+ol > li{
+    /*Cambiamos la familia de letra*/
+    font-family: sans-serif;
+    /*Disminuimos 1px el tamaño*/
+    font-size: 17px;
+}
+
+/*Elementos "formateados" de una lista*/
+/*"titulo"*/
+dl > dt{
+    /*Aumentamos el tamaño*/
+    font-size: 20px;
+}
+
+dl > dd{
+    /*Modificamos el estilo de la letra*/
+    font-style: oblique;
+}
+
+/*Tabla de contenidos*/
+
+table {
+    /*Ocupa el 70% del ancho*/
+    width: 70%;
+    /*Borde solido y blanco*/
+    border: 1px solid white;
+    /*Color de fondo azul*/
+    background-color: dodgerblue;
+    
+    /**Dejamos espacio por encima de 30 pixeles/
+    margin-top: 30px;
+    
+    /*Centramos la tabla*/
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th{
+    font-size: 20px;
+    color: white;
+}
+
+th, td {
+    /*ocupa el 25% del tamaño disponible*/
+    width: 25%;
+    /*Lo alineamos al centro*/
+    text-align: center;
+    /*Borde solido y blanco*/
+    border: 1px solid white;
+    
+    color: white;
+    align-content: center;
+}
+
+td > a {
+    color: white;
+}
+
+video {
+     margin-right: auto;
+     margin-left: auto;
+     background-color: black;
+}
+
+/*footer*/
+footer{
+    margin-top: 30px;
+    float: left;
+}
