@@ -17,7 +17,9 @@
 ## (Comments)
 #Sample Feature Definition Template
 @tag 
-  Feature: landing page 
+  Feature: landing page
+  
+  @tag1
   Scenario: client makes call to GET /
     When the client calls /
     Then the client receives status code of 200

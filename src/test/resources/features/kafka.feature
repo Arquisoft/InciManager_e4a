@@ -17,7 +17,9 @@
 ## (Comments)
 #Sample Feature Definition Template
 @tag 
-  Feature: kafka message
-  Scenario: client sends a message to kafka stream
-    When the producer sends the message "Hello" to the topic "exampleTopic"
+  Feature: kafka send incidence
+  
+  @tag1
+  Scenario: agent sends a incident to the system by kafka
+    When the producer sends the message "Hello" to the topic "NEW_INDIDENCE"
     Then the consumer receives the message "Hello" from the topic "exampleTopic"
