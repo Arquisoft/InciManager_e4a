@@ -36,14 +36,14 @@ public class Incidence {
 	private Status state;
 	
 	@ManyToOne
-	  private HashMap hashMaps;
+	 private HashMap hashMaps;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_agent")
 	private Agent agent;
 
 	@OneToMany(
-	        mappedBy = "post", 
+	        mappedBy = "incidence", 
 	        cascade = CascadeType.ALL, 
 	        orphanRemoval = true
 	    )

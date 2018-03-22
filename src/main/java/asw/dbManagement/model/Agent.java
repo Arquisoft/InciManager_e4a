@@ -29,11 +29,11 @@ public class Agent {
 	private String password;
 	private int type;
 	
-	@OneToMany(mappedBy="creator")
+	@OneToMany(mappedBy="agent")
 	  private List<Incidence> incidences;
 	
 	@OneToMany(
-	        mappedBy = "Agent",
+	        mappedBy = "agent",
 	        cascade = CascadeType.ALL,
 	        orphanRemoval = true
 	    )

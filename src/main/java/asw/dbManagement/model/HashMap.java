@@ -1,5 +1,8 @@
 package asw.dbManagement.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,12 +25,12 @@ public class HashMap {
 	        cascade = CascadeType.ALL, 
 	        orphanRemoval = true
 	    )
-	private Incidence incidence;
+	private List<Incidence> incidence = new ArrayList<>();
 
 	public HashMap() {
 	}
 
-	public HashMap(String property, String value, Incidence incidence) {
+	public HashMap(String property, String value, List<Incidence> incidence) {
 		super();
 		this.property = property;
 		this.value = value;
@@ -58,13 +61,6 @@ public class HashMap {
 		this.value = value;
 	}
 
-	public Incidence getIncidence() {
-		return incidence;
-	}
-
-	public void setIncidence(Incidence incidence) {
-		this.incidence = incidence;
-	}
 
 	@Override
 	public int hashCode() {
