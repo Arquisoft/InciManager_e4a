@@ -34,7 +34,7 @@ public class ErrorFactory {
 		case REQUIRED_LOGIN:
 			return new RequiredLoginErrorResponse();
 		case INCORRECT_LOGIN:
-			return new UnknowErrorResponse();
+			return new UnknownErrorResponse();
 		default:// en caso de no conocer el error.
 			return new UnknownErrorResponse();
 		}
