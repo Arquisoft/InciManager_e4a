@@ -33,8 +33,8 @@ public class ErrorFactory {
 			return new UserNotFoundResponse();
 		case REQUIRED_LOGIN:
 			return new RequiredLoginErrorResponse();
-		
-
+		case INCORRECT_LOGIN:
+			return new UnknowErrorResponse();
 		default:// en caso de no conocer el error.
 			return new UnknownErrorResponse();
 		}
