@@ -20,15 +20,15 @@ Pasos para ejecutar:
 
 1-Descargar Apache Kafka de su página oficial.
 
-https://www.apache.org/dyn/closer.cgi?path=/kafka/1.0.1/kafka_2.11-1.0.1.tgz
+  ->https://www.apache.org/dyn/closer.cgi?path=/kafka/1.0.1/kafka_2.11-1.0.1.tgz
 
 2- Ejecutar Apache Zookeeper.
 
-bin\windows\zookeeper-server-start.bat config\zookeeper.properties
+  ->bin\windows\zookeeper-server-start.bat config\zookeeper.properties
 
 3- Ejecutar Apache Kafka.
 
-bin\windows\kafka-server-start.bat config\server.properties
+  ->bin\windows\kafka-server-start.bat config\server.properties
 
 4-Ejecutar eclipse desde la clase Application
 
