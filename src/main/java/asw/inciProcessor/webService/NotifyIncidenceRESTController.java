@@ -27,32 +27,28 @@ public class NotifyIncidenceRESTController {
 	private KafkaProducer kafka;
 	private GetAgentImpl agentService;
 
-	
-	
-	
-	
-	
-	
-
-	
-	
 	//Este método hay que adecuarlo al nuevo modelo (probablemente sea necesario un nuevo constructor en incidence)
 	//
 
 	@RequestMapping(value = "/notify", method = RequestMethod.POST, headers = { "Accept=application/json",
 			"Accept=application/xml" }, produces = { "application/json", "text/xml" })
 	public ResponseEntity<RespuestaNotifyIncidenceREST> getPOSTpetition(@RequestBody(required = true) PeticionNotifyIncidenceREST peticion) {
-
-		Incidence incidence = new Incidence(peticion.getLogin(),peticion.getPassword(),peticion.getName(),
-				peticion.getDescription(),peticion.getLocation(), peticion.getTags());
+		
+		if(!agentService.checkUserAndPass(peticion.getLogin(), peticion.getPassword())) {
+			throw asw.factory.ErrorFactory.getError(asw.factory.ErrorFactory.Errors.INCORRECT_LOGIN);
+		}
+		
+		Incidence incidence = new Incidence(peticion.getLogin(), peticion.getPassword(), peticion.getName(),
+				peticion.getDescription(), peticion.getLocation(), peticion.getTags(), peticion.getMapInfo());
 		
 		incidenceService.saveIncidence(incidence);
 
 		kafka.sendNuevaIncidencia(incidence.getId());
 		
-		return new ResponseEntity<RespuestaNotifyIncidenceREST>(new RespuestaNotifyIncidenceREST(incidence), HttpStatus.OK);
+		return new ResponseEntity<RespuestaNotifyIncidenceREST>(new RespuestaNotifyIncidenceREST(), HttpStatus.OK);
 		
 	}
+
 
 	@ExceptionHandler(ErrorResponse.class)
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)

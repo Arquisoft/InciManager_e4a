@@ -5,8 +5,8 @@ import java.util.regex.Pattern;
 
 import asw.Application;
 import asw.dbManagement.model.Agent;
-import factory.ErrorFactory;
-import factory.ErrorFactory.Errors;
+import asw.factory.ErrorFactory;
+import asw.factory.ErrorFactory.Errors;
 
 public class Assert {
 	

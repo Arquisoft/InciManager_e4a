@@ -27,14 +27,16 @@ public class Incidence {
 	
 	@Id @GeneratedValue public int id;
 	
+	private String login;
+	private String password;
 	private String name;
 	private String description;
 	private String location;
 	private Date expiration;
 	private Status state;
 	
-	@OneToMany(mappedBy="owner")
-	  private List<HashMap> hashMaps;
+	@ManyToOne
+	  private HashMap hashMaps;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_agent")
@@ -67,9 +69,22 @@ public class Incidence {
 		this.location = location;
 		this.expiration = expiration;
 		this.state = state;
-		this.hashMaps = hashMaps;
+		//this.hashMaps = hashMaps;
 		this.agent = agent;
 		this.agentsAssignment = agentsAssignment;
+	}
+
+	public Incidence(String login, String password, String name2, String description2, String location2,
+			List<String> tags, HashMap fields) {
+		super();
+		this.login=login;
+		this.password=password;
+		this.name=name2;
+		this.description=description2;
+		this.location=location2;
+		this.categories=new HashSet<>();
+		this.hashMaps=fields;
+		
 	}
 
 	public int getId() {
@@ -120,11 +135,11 @@ public class Incidence {
 		this.state = state;
 	}
 
-	public List<HashMap> getHashMaps() {
+	public HashMap getHashMaps() {
 		return hashMaps;
 	}
 
-	public void setHashMaps(List<HashMap> hashMaps) {
+	public void setHashMaps(HashMap hashMaps) {
 		this.hashMaps = hashMaps;
 	}
 

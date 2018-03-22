@@ -1,6 +1,5 @@
 package asw.inciProcessor.webService.request;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class PeticionNotifyIncidenceREST {
@@ -11,11 +10,11 @@ public class PeticionNotifyIncidenceREST {
 	private String description;
 	private String location;
 	private List<String> labels;
-	private HashMap<String, String> mapInfo;
+	private asw.dbManagement.model.HashMap mapInfo;
 
 	
 	public PeticionNotifyIncidenceREST(String login, String password, String name, String description, String location,
-			List<String> tags, HashMap<String, String> fields) {
+			List<String> tags, asw.dbManagement.model.HashMap fields) {
 		super();
 		this.login = login;
 		this.password = password;
@@ -74,14 +73,13 @@ public class PeticionNotifyIncidenceREST {
 		this.labels = tags;
 	}
 
-	public HashMap<String, String> getFields() {
+	public asw.dbManagement.model.HashMap getMapInfo() {
 		return mapInfo;
 	}
 
-	public void setFields(HashMap<String, String> fields) {
-		this.mapInfo = fields;
-	}
-	
+	public void setMapInfo(asw.dbManagement.model.HashMap mapInfo) {
+		this.mapInfo = mapInfo;
+	}	
 	
 
 }

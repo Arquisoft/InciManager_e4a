@@ -1,11 +1,10 @@
 package asw.dbManagement.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,8 +17,11 @@ public class HashMap {
 	private String property;
 	private String value;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idIncidence")
+	@OneToMany(
+	        mappedBy = "hashMaps", 
+	        cascade = CascadeType.ALL, 
+	        orphanRemoval = true
+	    )
 	private Incidence incidence;
 
 	public HashMap() {

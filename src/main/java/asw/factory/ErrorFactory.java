@@ -1,4 +1,4 @@
-package factory;
+package asw.factory;
 
 
 import asw.inciProcessor.webService.responses.errors.ErrorResponse;
@@ -11,6 +11,7 @@ import asw.inciProcessor.webService.responses.errors.UserNotFoundResponse;
 public class ErrorFactory {
 
 	public static enum Errors {
+		INCORRECT_LOGIN,
 		REQUIRED_LOGIN,
 		REQUIRED_PASSWORD,
 		USER_NOT_FOUND,
