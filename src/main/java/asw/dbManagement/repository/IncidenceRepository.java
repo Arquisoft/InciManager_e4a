@@ -10,6 +10,6 @@ import asw.dbManagement.model.Incidence;
 @Repository
 public interface IncidenceRepository extends CrudRepository<Incidence, Long>{
 	
-	List<Incidence> findByUser(String user);
+	
 
 }

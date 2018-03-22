@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
-
-import asw.agents.util.Assert;
-import asw.agents.webService.responses.errors.ErrorResponse;
 import asw.dbManagement.impl.GetAgentImpl;
 import asw.dbManagement.model.Agent;
+import asw.dbManagement.util.Assert;
+import asw.inciProcessor.webService.responses.errors.ErrorResponse;
 
 @Controller
 public class GetAgentInfoHTMLController {
@@ -35,13 +34,13 @@ public class GetAgentInfoHTMLController {
 
 		Assert.isLoginEmpty(login);
 		Assert.isPasswordEmpty(password);
-		Assert.isKindEmpty(kind);
+
 
 		Agent agente = getAgent.getAgent(login);
 
 		Assert.isAgentNull(agente);
 		Assert.isPasswordCorrect(password, agente);
-		Assert.isKindCorrect(kind, agente);
+		
 
 		session.setAttribute("agent", agente);
 
