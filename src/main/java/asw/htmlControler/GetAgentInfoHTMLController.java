@@ -34,12 +34,14 @@ public class GetAgentInfoHTMLController {
 
 		Assert.isLoginEmpty(login);
 		Assert.isPasswordEmpty(password);
+		Assert.isKindEmpty(kind);
 
 
 		Agent agente = getAgent.getAgent(login);
 
 		Assert.isAgentNull(agente);
 		Assert.isPasswordCorrect(password, agente);
+		Assert.isKindCorrect(kind, agente);
 		
 
 		session.setAttribute("agent", agente);

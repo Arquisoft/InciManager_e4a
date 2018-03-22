@@ -7,8 +7,11 @@ import asw.Application;
 import asw.dbManagement.model.Agent;
 import asw.factory.ErrorFactory;
 import asw.factory.ErrorFactory.Errors;
+import asw.inciProcessor.webService.CsvReader;
 
 public class Assert {
+	
+	public static CsvReader instancia;
 	
 	public static boolean isLoginEmpty(String login) {
 		if(login.trim().isEmpty())
@@ -45,6 +48,21 @@ public class Assert {
 			throw ErrorFactory.getError(Errors.INCORRECT_PASSWORD_DO_NOT_MATCH);
 		}
 		return true;
+	}
+	public static boolean isKindCorrect(String kind,Agent agent){
+		if(!Application.instancia.checkType(kind, agent)) {
+			throw ErrorFactory.getError(Errors.INCORRECT_KIND_DO_NOT_MATCH);
+		}
+		int numTipo = instancia.obtainType(kind);
+		agent.setType(numTipo);
+		return true;
+	}
+	public static boolean isKindEmpty(String kind) {
+		if(kind.trim().isEmpty())
+			throw ErrorFactory.getError(Errors.REQUIRED_KIND);
+		else
+			return false;
+		
 	}
 
 	
