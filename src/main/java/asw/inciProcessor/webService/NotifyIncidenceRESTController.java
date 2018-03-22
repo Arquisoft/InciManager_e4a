@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import asw.Kafka.KafkaProducer;
 import asw.dbManagement.IncidenceService;
+import asw.dbManagement.impl.GetAgentImpl;
 import asw.dbManagement.model.Incidence;
 import asw.inciProcessor.webService.request.PeticionNotifyIncidenceREST;
 import asw.inciProcessor.webService.responses.RespuestaNotifyIncidenceREST;
@@ -24,10 +25,18 @@ public class NotifyIncidenceRESTController {
 	@Autowired
 	private IncidenceService incidenceService;
 	private KafkaProducer kafka;
+	private GetAgentImpl agentService;
+
+	
+	
+	
+	
+
+	
 	
 	//Este método hay que adecuarlo al nuevo modelo (probablemente sea necesario un nuevo constructor en incidence)
 	//
-/*
+
 	@RequestMapping(value = "/notify", method = RequestMethod.POST, headers = { "Accept=application/json",
 			"Accept=application/xml" }, produces = { "application/json", "text/xml" })
 	public ResponseEntity<RespuestaNotifyIncidenceREST> getPOSTpetition(@RequestBody(required = true) PeticionNotifyIncidenceREST peticion) {
@@ -41,7 +50,7 @@ public class NotifyIncidenceRESTController {
 		
 		return new ResponseEntity<RespuestaNotifyIncidenceREST>(new RespuestaNotifyIncidenceREST(incidence), HttpStatus.OK);
 		
-	}*/
+	}
 
 	@ExceptionHandler(ErrorResponse.class)
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
