@@ -15,3 +15,27 @@ InciManager e4a
 - Carlos Concheso Cubillas (UO237674)
 - Paloma Sierra Bonet (UO232919)
 - Pelayo Garcia Menendez (UO251765)
+
+Pasos para ejecutar:
+
+1-Descargar Apache Kafka de su página oficial 
+https://www.apache.org/dyn/closer.cgi?path=/kafka/1.0.1/kafka_2.11-1.0.1.tgz
+
+2- Ejecutar Apache Zookeeper
+bin\windows\zookeeper-server-start.bat config\zookeeper.properties
+
+3- Ejecutar Apache Kafka
+bin\windows\kafka-server-start.bat config\server.properties
+
+4-Ejecutar eclipse desde la clase Application
+
+5-Conectarse al localhost:8880
+
+6-Introducir datos para loguearte
+
+7-Consultar tus incidencias o crear una nueva
+
+8-Si seleccionas crear una nueva, rellenas los datos y lo envias
+
+
+
