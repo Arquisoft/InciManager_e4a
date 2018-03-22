@@ -15,7 +15,7 @@ import javax.annotation.ManagedBean;
 
 import Kafka.Util.Topics;
 
-public class KafkaProducerImpl implements KafkaProducerI {
+public class KafkaProducerImpl implements KafkaProducer {
 
 	
 	private static final Logger logger = Logger.getLogger(KafkaProducerImpl.class);
@@ -29,7 +29,7 @@ public class KafkaProducerImpl implements KafkaProducerI {
 	
 	
 	@Override
-	public void sendNuevaIncidencia(String idIncidence) {
+	public void sendNuevaIncidencia(Long idIncidence) {
 		send(Topics.NEW_INDIDENCE, "{ \"Nueva incidencia con id\":\"" + idIncidence + "\"}");
 		
 	}
