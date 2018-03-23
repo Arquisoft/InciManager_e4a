@@ -15,14 +15,10 @@ import org.hibernate.annotations.NaturalIdCache;
 
 @Entity(name = "Agent")
 @Table(name = "Agent")
-@NaturalIdCache
-@Cache(
-    usage = CacheConcurrencyStrategy.READ_WRITE
-)
 public class Agent {
 	
 	@Id
-	private String ID;
+	private String iD;
 	private String email;
 	private String localizacion;
 	private String nombre;
@@ -44,7 +40,7 @@ public class Agent {
 	public Agent(String iD, String email, String localizacion, String nombre, String password, int type,
 			List<Incidence> incidences, List<Assignment> incidencesAssignment) {
 		super();
-		ID = iD;
+		this.iD = iD;
 		this.email = email;
 		this.localizacion = localizacion;
 		this.nombre = nombre;
@@ -55,11 +51,11 @@ public class Agent {
 	}
 
 	public String getID() {
-		return ID;
+		return iD;
 	}
 
 	public void setID(String iD) {
-		ID = iD;
+		iD = iD;
 	}
 
 	public String getEmail() {
@@ -122,7 +118,7 @@ public class Agent {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((ID == null) ? 0 : ID.hashCode());
+		result = prime * result + ((iD == null) ? 0 : iD.hashCode());
 		return result;
 	}
 
@@ -135,10 +131,10 @@ public class Agent {
 		if (getClass() != obj.getClass())
 			return false;
 		Agent other = (Agent) obj;
-		if (ID == null) {
-			if (other.ID != null)
+		if (iD == null) {
+			if (other.iD != null)
 				return false;
-		} else if (!ID.equals(other.ID))
+		} else if (!iD.equals(other.iD))
 			return false;
 		return true;
 	}
