@@ -3,7 +3,7 @@ package asw.Kafka;
 
 public interface KafkaProducer {
 	
-	public void sendNuevaIncidencia(int idIncidence);
+	public void sendNuevaIncidencia(Long long1);
 
 
 	

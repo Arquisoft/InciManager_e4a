@@ -2,19 +2,21 @@ package asw.inciProcessor.webService.request;
 
 import java.util.List;
 
+import asw.dbManagement.model.LatLong;
+
 public class PeticionNotifyIncidenceREST {
 	
 	private String login;
 	private String password;
 	private String name;
 	private String description;
-	private String location;
+	private LatLong location;
 	private List<String> labels;
-	private asw.dbManagement.model.HashMap mapInfo;
+	private asw.dbManagement.model.MapInfo mapInfo;
 
 	
-	public PeticionNotifyIncidenceREST(String login, String password, String name, String description, String location,
-			List<String> tags, asw.dbManagement.model.HashMap fields) {
+	public PeticionNotifyIncidenceREST(String login, String password, String name, String description, LatLong location,
+			List<String> tags, asw.dbManagement.model.MapInfo fields) {
 		super();
 		this.login = login;
 		this.password = password;
@@ -57,11 +59,11 @@ public class PeticionNotifyIncidenceREST {
 		this.description = description;
 	}
 
-	public String getLocation() {
+	public LatLong getLocation() {
 		return location;
 	}
 
-	public void setLocation(String location) {
+	public void setLocation(LatLong location) {
 		this.location = location;
 	}
 
@@ -73,11 +75,11 @@ public class PeticionNotifyIncidenceREST {
 		this.labels = tags;
 	}
 
-	public asw.dbManagement.model.HashMap getMapInfo() {
+	public asw.dbManagement.model.MapInfo getMapInfo() {
 		return mapInfo;
 	}
 
-	public void setMapInfo(asw.dbManagement.model.HashMap mapInfo) {
+	public void setMapInfo(asw.dbManagement.model.MapInfo mapInfo) {
 		this.mapInfo = mapInfo;
 	}	
 	

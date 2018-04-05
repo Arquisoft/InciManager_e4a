@@ -4,21 +4,22 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import asw.dbManagement.model.Incidence;
-import asw.dbManagement.util.Status;
+import asw.dbManagement.model.LatLong;
+import asw.dbManagement.model.State;
 
 @XmlRootElement(name = "incidence")
 public class RespuestaNotifyIncidenceREST {
 	
 	private String name;
-	private String location;
-	private Status status;
-	private int id;
+	private LatLong location;
+	private State status;
+	private Long id;
 	
 	public RespuestaNotifyIncidenceREST() {}
 	
 	public RespuestaNotifyIncidenceREST(Incidence incidence) 
 	{
-		setName(incidence.getName());
+		setName(incidence.getInciName());
 		setLocation(incidence.getLocation());
 		setStatus(incidence.getState());
 		setId(incidence.getId());
@@ -33,31 +34,31 @@ public class RespuestaNotifyIncidenceREST {
 		this.name = name;
 	}
 
-	public String getLocation() {
+	public LatLong getLocation() {
 		return location;
 	}
 
 	@XmlElement
-	public void setLocation(String location) {
-		this.location = location;
+	public void setLocation(LatLong latLong) {
+		this.location = latLong;
 	}
 
-	public Status getStatus() {
+	public State getStatus() {
 		return status;
 	}
 
 	@XmlElement
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setStatus(State state) {
+		this.status = state;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
 	@XmlElement
-	public void setId(int id) {
-		this.id = id;
+	public void setId(Long long1) {
+		this.id = long1;
 	}
 	
 	

@@ -38,7 +38,7 @@ public class NotifyIncidenceRESTController {
 			throw asw.factory.ErrorFactory.getError(asw.factory.ErrorFactory.Errors.INCORRECT_LOGIN);
 		}
 		
-		Incidence incidence = new Incidence(peticion.getLogin(), peticion.getPassword(), peticion.getName(),
+		Incidence incidence = new Incidence(peticion.getName(),
 				peticion.getDescription(), peticion.getLocation(), peticion.getTags(), peticion.getMapInfo());
 		
 		incidenceService.saveIncidence(incidence);

@@ -26,7 +26,7 @@ public class KafkaProducerImpl implements KafkaProducer {
 	
 	
 	@Override
-	public void sendNuevaIncidencia(int idIncidence) {
+	public void sendNuevaIncidencia(Long idIncidence) {
 		send(Topics.NEW_INDIDENCE, "{ \"Nueva incidencia con id\":\"" + idIncidence + "\"}");
 		
 	}

@@ -1,146 +1,142 @@
 package asw.dbManagement.model;
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.OneToOne;
 
-import asw.dbManagement.util.Status;
-
-@Entity(name = "Incidence")
-@Table(name = "Incidence")
+@Entity
 public class Incidence {
-	
-	@Id @GeneratedValue public int id;
-	
-	private String login;
-	private String password;
-	private String name;
+
+	@Id
+	@GeneratedValue
+	private Long id;
+
+	private String inciName;
 	private String description;
-	private String location;
 	private Date expiration;
-	private Status state;
-	
-	@ManyToOne
-	 private HashMap hashMaps;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_agent")
+	private LatLong location;
+
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "agent_id")
 	private Agent agent;
 
-	@OneToMany(
-	        mappedBy = "incidence", 
-	        cascade = CascadeType.ALL, 
-	        orphanRemoval = true
-	    )
-	private List<Assignment> agentsAssignment = new ArrayList<>();
-	
-	@ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                CascadeType.PERSIST,
-                CascadeType.MERGE
-            })
-    @JoinTable(name = "Incidence-Category",
-            joinColumns = { @JoinColumn(name = "idIncidence") },
-            inverseJoinColumns = { @JoinColumn(name = "idCategory") })
-    private Set<Category> categories = new HashSet<>();
-	
-	public Incidence() {}
-	
-	public Incidence(String name, String description, String location, Date expiration, Status state,
-			List<HashMap> hashMaps, Agent agent, List<Assignment> agentsAssignment) {
-		super();
-		this.name = name;
-		this.description = description;
-		this.location = location;
-		this.expiration = expiration;
-		this.state = state;
-		//this.hashMaps = hashMaps;
-		this.agent = agent;
-		this.agentsAssignment = agentsAssignment;
-	}
+	@ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
+	private Set<String> tags = new HashSet<String>();
 
-	public Incidence(String login, String password, String name2, String description2, String location2,
-			List<String> tags, HashMap fields) {
-		super();
-		this.login=login;
-		this.password=password;
-		this.name=name2;
-		this.description=description2;
-		this.location=location2;
-		this.categories=new HashSet<>();
-		this.hashMaps=fields;
+	@ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
+	private List<String> moreInfo = new ArrayList<String>();
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "mapInfo_Id")
+	private MapInfo hashMaps;
+	
+	@Enumerated(EnumType.STRING)
+	private State state;
+
+	@OneToOne(mappedBy = "incidencia")
+	private Notification notification;
+
+	public Incidence() {
 		
 	}
 
-	public int getId() {
-		return id;
-	}
+	public Incidence(String name, LatLong location) {
+		if (name.equals("") || location == null)
+			throw new IllegalArgumentException("Incident fields cannot be empty");
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getLocation() {
-		return location;
-	}
-
-	public void setLocation(String location) {
+		this.inciName = name;
 		this.location = location;
 	}
 
-	public Date getExpiration() {
-		return expiration;
+	public Incidence(String name, LatLong latLng, Agent agent) {
+		this(name, latLng);
+		this.setAgent(agent);
 	}
 
-	public void setExpiration(Date expiration) {
-		this.expiration = expiration;
+	public Incidence(String name, String description2, LatLong location2, List<String> tags2, MapInfo mapInfo) {
+		this.inciName=name;
+		this.description=description2;
+		this.location=location2;
+		for(String str:tags2) {
+			this.tags.add(str);
+		}
+		this.hashMaps=mapInfo;
+		
 	}
 
-	public Status getState() {
-		return state;
+	public void addMoreInfo(String info) {
+		this.moreInfo.add(info);
 	}
 
-	public void setState(Status state) {
-		this.state = state;
+	/*public void addProperty(String property, Object value) {
+		this.properties.put(property, value);
 	}
 
-	public HashMap getHashMaps() {
+	public Map<String, Object> getProperties() {
+		return properties;
+	}
+
+	public void setProperties(Map<String, Object> properties) {
+		this.properties = properties;
+	}*/
+	
+
+	public void setInciName(String inciName) {
+		this.inciName = inciName;
+	}
+
+	public MapInfo getHashMaps() {
 		return hashMaps;
 	}
 
-	public void setHashMaps(HashMap hashMaps) {
+	public void setHashMaps(MapInfo hashMaps) {
 		this.hashMaps = hashMaps;
+	}
+
+	public void setLocation(LatLong location) {
+		this.location = location;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getInciName() {
+		return inciName;
+	}
+
+	public LatLong getLocation() {
+		return location;
+	}
+
+	public Set<String> getTags() {
+		return tags;
+	}
+
+	public List<String> getMoreInfo() {
+		return moreInfo;
+	}
+
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
 	}
 
 	public Agent getAgent() {
@@ -151,55 +147,45 @@ public class Incidence {
 		this.agent = agent;
 	}
 
-	public List<Assignment> getAssignments() {
-		return agentsAssignment;
+	public Notification getNotification() {
+		return notification;
 	}
 
-	public void setAssignments(List<Assignment> assignments) {
-		this.agentsAssignment = assignments;
+	public void setNotification(Notification notification) {
+		this.notification = notification;
 	}
 
-	public List<Assignment> getAgentsAssignment() {
-		return agentsAssignment;
+	public void setTags(Set<String> tags) {
+		this.tags = tags;
 	}
 
-	public void setAgentsAssignment(List<Assignment> agentsAssignment) {
-		this.agentsAssignment = agentsAssignment;
+	public void setMoreInfo(List<String> moreInfo) {
+		this.moreInfo = moreInfo;
 	}
 
-	public Set<Category> getCategories() {
-		return categories;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setCategories(Set<Category> categories) {
-		this.categories = categories;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public void addAgent(Agent agent) {
-        Assignment assignment = new Assignment(this, agent);
-        agentsAssignment.add(assignment);
-        agent.getIncidencesAssignment().add(assignment);
-    }
- 
-    public void removeAgent(Agent agent) {
-    	for (Iterator<Assignment> iterator = agentsAssignment.iterator(); 
-                iterator.hasNext(); ) {
-    		Assignment assign = iterator.next();
-    		if (assign.getIncidence().equals(this) &&
-    				assign.getAgent().equals(agent)) {
-                iterator.remove();
-                assign.getAgent().getIncidencesAssignment().remove(assign);
-                assign.setIncidence(null);
-                assign.setAgent(null);
-            }
-    	}
-    }
-    
+	public Date getExpiration() {
+		return expiration;
+	}
+
+	public void setExpiration(Date expiration) {
+		this.expiration = expiration;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((inciName == null) ? 0 : inciName.hashCode());
+		result = prime * result + ((location == null) ? 0 : location.hashCode());
 		return result;
 	}
 
@@ -211,12 +197,51 @@ public class Incidence {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
+
 		Incidence other = (Incidence) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Incidence [id=").append(id).append(", inciName=").append(inciName).append(", location=")
+				.append(location).append(", tags=").append(tags).append(", moreInfo=").append(moreInfo)
+				.append(", properties=").append("]");
+		return builder.toString();
+	}
+
+	public void addNot(Notification n1) {
+		this.notification = n1;
+	}
 	
+	public String tagList() {
+		String cadena = "";
+		for (String s : tags) {
+			cadena +=s+",";
+		}
+		return cadena;
+	}
 	
+	public boolean isOpen() {
+		return this.state.equals(State.OPEN);
+	}
 	
+	public boolean isInProg() {
+		return this.state.equals(State.IN_PROCESS);
+	}
+	
+	public boolean isClosed() {
+		return this.state.equals(State.CLOSED);
+	}
+	
+	public boolean isCancelled() {
+		return this.state.equals(State.CANCELLED);
+	}
+
 }
