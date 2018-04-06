@@ -1,20 +1,13 @@
 package asw.dbManagement.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.NaturalIdCache;
 
-@Entity(name = "Agent")
-@Table(name = "Agent")
+@Entity
 public class Agent {
 	
 	@Id
@@ -28,17 +21,10 @@ public class Agent {
 	@OneToMany(mappedBy="agent")
 	  private List<Incidence> incidences;
 	
-	@OneToMany(
-	        mappedBy = "agent",
-	        cascade = CascadeType.ALL,
-	        orphanRemoval = true
-	    )
-	    private List<Assignment> incidencesAssignment = new ArrayList<>();
-
 	public Agent() {}
 	
 	public Agent(String iD, String email, String localizacion, String nombre, String password, int type,
-			List<Incidence> incidences, List<Assignment> incidencesAssignment) {
+			List<Incidence> incidences) {
 		super();
 		this.iD = iD;
 		this.email = email;
@@ -47,7 +33,6 @@ public class Agent {
 		this.password = password;
 		this.type = type;
 		this.incidences = incidences;
-		this.incidencesAssignment = incidencesAssignment;
 	}
 
 	public String getID() {
@@ -55,7 +40,7 @@ public class Agent {
 	}
 
 	public void setID(String iD) {
-		iD = iD;
+		this.iD = iD;
 	}
 
 	public String getEmail() {
@@ -106,13 +91,6 @@ public class Agent {
 		this.incidences = incidences;
 	}
 
-	public List<Assignment> getIncidencesAssignment() {
-		return incidencesAssignment;
-	}
-
-	public void setIncidencesAssignment(List<Assignment> incidencesAssignment) {
-		this.incidencesAssignment = incidencesAssignment;
-	}
 
 	@Override
 	public int hashCode() {
