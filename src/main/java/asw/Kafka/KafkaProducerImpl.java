@@ -10,6 +10,8 @@ import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import asw.Kafka.Util.Topics;
+import asw.dbManagement.entities.Incidence;
+import asw.dbManagement.entities.Notification;
 
 
 public class KafkaProducerImpl implements KafkaProducer {
@@ -26,8 +28,8 @@ public class KafkaProducerImpl implements KafkaProducer {
 	
 	
 	@Override
-	public void sendNuevaIncidencia(Long idIncidence) {
-		send(Topics.NEW_INDIDENCE, "{ \"Nueva incidencia con id\":\"" + idIncidence + "\"}");
+	public void sendNuevaIncidencia(Notification notification) {
+		send(Topics.NEW_INDIDENCE, "{ \"Nueva incidencia con id\":\"" + notification + "\"}");
 		
 	}
 	
@@ -46,6 +48,15 @@ public class KafkaProducerImpl implements KafkaProducer {
 				logger.error("Error on sending message \"" + data + "\", stacktrace " + ex.getMessage());
 			}
 		});
-	}	
+	}
 
+
+	@Override
+	public void sendNuevaIncidencia(Incidence incidence) {
+		send(Topics.NEW_INDIDENCE, "{ \"Nueva incidencia \":\"" + incidence + "\"}");
+		
+	}
+
+
+	
 }

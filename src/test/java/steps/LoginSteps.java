@@ -1,10 +1,11 @@
 package steps;
 
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import asw.dbManagement.model.Agent;
+import asw.dbManagement.entities.Agent;
 import asw.inciProcessor.webService.NotifyIncidenceRESTController;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;

@@ -1,6 +1,6 @@
 package utils;
 
-import asw.dbManagement.model.State;
+import asw.dbManagement.entities.State;
 
 public class StateChecker {
 	public static State getState(Long num) {

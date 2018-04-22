@@ -1,8 +1,11 @@
 package asw.inciProcessor.webService.request;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-
-import asw.dbManagement.model.LatLong;
+import java.util.Map;
+import java.util.Set;
 
 public class PeticionNotifyIncidenceREST {
 	
@@ -10,22 +13,31 @@ public class PeticionNotifyIncidenceREST {
 	private String password;
 	private String name;
 	private String description;
-	private LatLong location;
-	private List<String> labels;
-	private asw.dbManagement.model.MapInfo mapInfo;
+	private List<String> location;
+	private String labels;
+	private List<String> aditionalInfo;
+	private Map<String, Object> mapInfo;
 
+	public PeticionNotifyIncidenceREST() {
+		
+	}
 	
-	public PeticionNotifyIncidenceREST(String login, String password, String name, String description, LatLong location,
-			List<String> tags, asw.dbManagement.model.MapInfo fields) {
+	
+
+	public PeticionNotifyIncidenceREST(String login, String password, String name, String description,
+			List<String> location, String labels, List<String> aditionalInfo, Map<String, Object> properties) {
 		super();
 		this.login = login;
 		this.password = password;
 		this.name = name;
 		this.description = description;
 		this.location = location;
-		this.labels = tags;
-		this.mapInfo = fields;
+		this.labels = labels;
+		this.aditionalInfo = aditionalInfo;
+		this.mapInfo = properties;
 	}
+
+
 
 	public String getLogin() {
 		return login;
@@ -59,29 +71,39 @@ public class PeticionNotifyIncidenceREST {
 		this.description = description;
 	}
 
-	public LatLong getLocation() {
+	public List<String> getLocation() {
 		return location;
 	}
 
-	public void setLocation(LatLong location) {
+	public void setLocation(List<String> location) {
 		this.location = location;
 	}
 
-	public List<String> getTags() {
+	public String getLabels() {
 		return labels;
 	}
 
-	public void setTags(List<String> tags) {
-		this.labels = tags;
+	public void setLabels(String labels) {
+		this.labels = labels;
 	}
 
-	public asw.dbManagement.model.MapInfo getMapInfo() {
+	public List<String> getMoreInfo() {
+		return aditionalInfo;
+	}
+
+	public void setMoreInfo(List<String> moreInfo) {
+		this.aditionalInfo = moreInfo;
+	}
+
+	public Map<String, Object> getProperties() {
 		return mapInfo;
 	}
 
-	public void setMapInfo(asw.dbManagement.model.MapInfo mapInfo) {
-		this.mapInfo = mapInfo;
-	}	
+	public void setProperties(Map<String, Object> properties) {
+		this.mapInfo = properties;
+	}
+
+	
 	
 
 }

@@ -1,10 +1,6 @@
 package asw.dbManagement.util;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import asw.Application;
-import asw.dbManagement.model.Agent;
+import asw.dbManagement.entities.Agent;
 import asw.factory.ErrorFactory;
 import asw.factory.ErrorFactory.Errors;
 import asw.inciProcessor.webService.CsvReader;
@@ -49,14 +45,14 @@ public class Assert {
 		}
 		return true;
 	}
-	public static boolean isKindCorrect(String kind,Agent agent){
+	/*public static boolean isKindCorrect(String kind,Agent agent){
 		if(!Application.instancia.checkType(kind, agent)) {
 			throw ErrorFactory.getError(Errors.INCORRECT_KIND_DO_NOT_MATCH);
 		}
 		int numTipo = instancia.obtainType(kind);
 		agent.setType(numTipo);
 		return true;
-	}
+	}*/
 	public static boolean isKindEmpty(String kind) {
 		if(kind.trim().isEmpty())
 			throw ErrorFactory.getError(Errors.REQUIRED_KIND);

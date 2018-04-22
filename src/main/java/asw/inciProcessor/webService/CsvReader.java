@@ -2,13 +2,13 @@ package asw.inciProcessor.webService;
  
 
  
-import java.io.BufferedReader; 
-import java.io.FileReader; 
-import java.io.IOException; 
-import java.util.Collection; 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
- 
-import asw.dbManagement.model.Agent;
+
+import asw.dbManagement.entities.Agent;
  
  
 public class CsvReader {

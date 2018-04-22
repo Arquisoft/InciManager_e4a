@@ -3,9 +3,9 @@ package asw.inciProcessor.webService.responses;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import asw.dbManagement.model.Incidence;
-import asw.dbManagement.model.LatLong;
-import asw.dbManagement.model.State;
+import asw.dbManagement.entities.Incidence;
+import asw.dbManagement.entities.LatLong;
+import asw.dbManagement.entities.State;
 
 @XmlRootElement(name = "incidence")
 public class RespuestaNotifyIncidenceREST {
