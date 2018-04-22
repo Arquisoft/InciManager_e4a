@@ -1,4 +1,4 @@
-package asw.dbManagement.model;
+package asw.dbManagement.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

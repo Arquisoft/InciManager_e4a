@@ -1,4 +1,4 @@
-package asw.dbManagement.model;
+package asw.dbManagement.entities;
 
 import java.util.HashSet;
 import java.util.List;

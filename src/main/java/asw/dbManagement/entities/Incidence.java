@@ -1,12 +1,14 @@
-package asw.dbManagement.model;
+package asw.dbManagement.entities;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Convert;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,6 +20,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import asw.json.Deserializer;
+import asw.json.Serializer;
+import utils.IncidentProperties2Json;
+
+@JsonDeserialize(using = Deserializer.class)
+@JsonSerialize(using = Serializer.class)
 @Entity
 public class Incidence {
 
@@ -26,8 +37,8 @@ public class Incidence {
 	private Long id;
 
 	private String inciName;
-	private String description;
-	private Date expiration;
+	private String inciDescription;
+
 	private LatLong location;
 
 	@ManyToOne(cascade = CascadeType.MERGE)
@@ -39,10 +50,9 @@ public class Incidence {
 
 	@ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
 	private List<String> moreInfo = new ArrayList<String>();
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "mapInfo_Id")
-	private MapInfo hashMaps;
+
+	@Convert(converter = IncidentProperties2Json.class)
+	private Map<String, Object> properties = new HashMap<String, Object>();
 	
 	@Enumerated(EnumType.STRING)
 	private State state;
@@ -67,22 +77,24 @@ public class Incidence {
 		this.setAgent(agent);
 	}
 
-	public Incidence(String name, String description2, LatLong location2, List<String> tags2, MapInfo mapInfo) {
-		this.inciName=name;
-		this.description=description2;
-		this.location=location2;
-		for(String str:tags2) {
-			this.tags.add(str);
-		}
-		this.hashMaps=mapInfo;
-		
+
+	public Incidence(Agent agent, String inciName, String inciDescription, LatLong location, Set<String> tags,
+			List<String> moreInfo, Map<String, Object> properties) {
+		this.agent = agent;
+		this.inciName = inciName;
+		this.inciDescription = inciDescription;
+		this.location = location;
+		this.tags = tags;
+		this.moreInfo = moreInfo;
+		this.properties = properties;
+		setState(State.OPEN);
 	}
 
 	public void addMoreInfo(String info) {
 		this.moreInfo.add(info);
 	}
 
-	/*public void addProperty(String property, Object value) {
+	public void addProperty(String property, Object value) {
 		this.properties.put(property, value);
 	}
 
@@ -92,19 +104,14 @@ public class Incidence {
 
 	public void setProperties(Map<String, Object> properties) {
 		this.properties = properties;
-	}*/
-	
+	}
 
 	public void setInciName(String inciName) {
 		this.inciName = inciName;
 	}
 
-	public MapInfo getHashMaps() {
-		return hashMaps;
-	}
-
-	public void setHashMaps(MapInfo hashMaps) {
-		this.hashMaps = hashMaps;
+	public void setInciDescription(String inciDescription) {
+		this.inciDescription = inciDescription;
 	}
 
 	public void setLocation(LatLong location) {
@@ -118,6 +125,12 @@ public class Incidence {
 	public String getInciName() {
 		return inciName;
 	}
+	
+	
+	public String getInciDescription() {
+		return inciDescription;
+	}
+
 
 	public LatLong getLocation() {
 		return location;
@@ -163,22 +176,6 @@ public class Incidence {
 		this.moreInfo = moreInfo;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Date getExpiration() {
-		return expiration;
-	}
-
-	public void setExpiration(Date expiration) {
-		this.expiration = expiration;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -212,7 +209,7 @@ public class Incidence {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Incidence [id=").append(id).append(", inciName=").append(inciName).append(", location=")
 				.append(location).append(", tags=").append(tags).append(", moreInfo=").append(moreInfo)
-				.append(", properties=").append("]");
+				.append(", properties=").append(properties).append("]");
 		return builder.toString();
 	}
 

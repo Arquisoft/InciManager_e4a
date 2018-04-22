@@ -41,4 +41,18 @@ Pasos para ejecutar:
 8-Si seleccionas crear una nueva, rellenas los datos y lo envias
 
 
+# Rest
 
+ {
+	"login": "13864928A",
+	"password": "123456",
+	"name": "nombreIncidencia2",
+	"description": "descripcionIncidencia",
+	"location": ["11.111111","-2.222222"],
+	"labels": "label1,label2,label3",
+   	"moreInfo": ["adInfo1","adInfo2","adInfo3"],
+    "properties" : {
+      "key1":"value1",
+      "key2":"value2"
+    }
+}

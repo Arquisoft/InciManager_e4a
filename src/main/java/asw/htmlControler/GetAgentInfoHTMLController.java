@@ -11,16 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import asw.dbManagement.impl.GetAgentImpl;
-import asw.dbManagement.model.Agent;
+
+import asw.dbManagement.entities.Agent;
 import asw.dbManagement.util.Assert;
 import asw.inciProcessor.webService.responses.errors.ErrorResponse;
+import asw.services.AgentsService;
 
 @Controller
 public class GetAgentInfoHTMLController {
 
 	@Autowired
-	private GetAgentImpl getAgent;
+	private AgentsService agent;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String inicalicerLogin(Model model) {
@@ -37,11 +38,11 @@ public class GetAgentInfoHTMLController {
 		Assert.isKindEmpty(kind);
 
 
-		Agent agente = getAgent.getAgent(login);
+		Agent agente = agent.getAgent(login);
 
 		Assert.isAgentNull(agente);
 		Assert.isPasswordCorrect(password, agente);
-		Assert.isKindCorrect(kind, agente);
+		//Assert.isKindCorrect(kind, agente);
 		
 
 		session.setAttribute("agent", agente);
