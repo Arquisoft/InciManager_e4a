@@ -85,6 +85,9 @@ public class Notification {
 	public Incidence getIncidencia() {
 		return incidencia;
 	}
+	public Long getId() {
+		return id; 
+	}
 
 	public void setIncidencia(Incidence incidencia) {
 		this.incidencia = incidencia;

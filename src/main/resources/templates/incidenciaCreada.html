@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head">
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+	<nav th:replace="fragments/nav" />
+	<div class="content-wrapper">
+		<div class="container-fluid">
+			<!-- Breadcrumbs-->
+			<div class="container-fluid">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">InciManager</li>
+					<li class="breadcrumb-item active">Incidencia creada</li>
+				</ol>
+				<h1>Incidencia creada</h1>
+				<!-- Example DataTables Card-->
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="card">
+							<div class=card-header>
+								<i class="fa fa-area-chart"></i>Información de la incidencia
+							</div>
+
+							<div class="card-body">
+								<div class="row">
+
+									<div class="card">
+										<div class="card-header">ID asignada</div>
+										<div class="card-body">
+											<p th:text="${info.id}"></p>
+										</div>
+									</div>
+
+								</div>
+								<div class="row">
+									<div class="card">
+										<div class=card-header>Operador</div>
+										<div class="card-body">
+											<p th:text="${info.operator.operatorname}"></p>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="card">
+										<div class=card-header>Incidencia</div>
+										<div class="card sm-12">
+											<h4>Nombre</h4>
+											<p th:text="${info.incidencia.inciName}"></p>
+											<h4>Descripción</h4>
+											<p th:text="${info.incidencia.inciDescription}"></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+				<!-- /.container-fluid-->
+				<!-- /.content-wrapper-->
+
+				<footer class="sticky-footer">
+					<div class="container">
+						<div class="text-center">
+							<small>Copyright © InciManager_e4a 2018</small>
+						</div>
+					</div>
+				</footer>
+				<script src="/assets/vendor/jquery/jquery.min.js"></script>
+				<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+				<!-- Core plugin JavaScript-->
+				<script src="/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+				<!-- Page level plugin JavaScript-->
+				<script src="/assets/vendor/datatables/jquery.dataTables.js"></script>
+				<script src="/assets/vendor/datatables/dataTables.bootstrap4.js"></script>
+				<!-- Custom scripts for all pages-->
+				<script src="/assets/js/sb-admin.min.js"></script>
+				<!-- Custom scripts for this page-->
+				<script src="/assets/js/sb-admin-datatables.min.js"></script>
+</body>
+</html>

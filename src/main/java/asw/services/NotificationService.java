@@ -12,8 +12,8 @@ public class NotificationService {
 	@Autowired
 	NotificationRepository notificationRepository;
 
-	public void addIncident(Notification n1) {
-		notificationRepository.save(n1);		
+	public Notification addIncident(Notification n1) {
+		return notificationRepository.save(n1);		
 	}
 	
 }

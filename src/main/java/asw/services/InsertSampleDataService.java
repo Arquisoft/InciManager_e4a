@@ -53,7 +53,8 @@ public class InsertSampleDataService {
 		operatorService.addOperator(op3);
 		operatorService.addOperator(op4);
 		operatorService.addOperator(op5);
-/*		Incidence incidencia1 = new Incidence("Prueba1", new LatLong("43.518197", "-5.641936"), agente1); 
+		
+		/*Incidence incidencia1 = new Incidence("Prueba1", new LatLong("43.518197", "-5.641936"), agente1); 
 		incidencia1.setState(State.CANCELLED);
 		Incidence incidencia2 = new Incidence("Prueba2", new LatLong("42.459789,", "-6.070053"), agente1); 
 		incidencia2.setState(State.IN_PROCESS);

@@ -241,4 +241,9 @@ public class Incidence {
 		return this.state.equals(State.CANCELLED);
 	}
 
+	public void addTag(String etiqueta) {
+		tags.add(etiqueta);
+		
+	}
+
 }

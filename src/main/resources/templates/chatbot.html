@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head">
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+	<nav th:replace="fragments/nav" />
+	<div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <div class="container-fluid">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">InciManager</li>
+				<li class="breadcrumb-item active">Creación de incidencias</li>
+			</ol>
+			
+			<h1>Seguimiento incidencias</h1>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-body">
+        	<div class = "card mb-3" th:if = "${duplas}">
+        		<div class = "card-body">
+        			<table >
+        				<thead>
+			                <tr>
+			                  <th>Pregunta</th>
+			                  <th>Respuesta</th>			                  
+			                </tr>			                
+			              </thead>
+			              <tbody th:each= "dupla : ${duplas}">
+				            <tr>
+				            	<td th:text="${dupla.pregunta}"></td>
+				                <td th:text="${dupla.respuesta}"></td>
+				           	</tr>
+				           </tbody>
+        			</table>
+        		</div>
+        	</div>
+        	<div>        
+        	<form class = "navbar-form" action = "/responderChatbot">
+				  <div class="form-group">
+				    <h2 th:text= "${pregunta}"></h2>
+				    <input type="text" name = "respuesta" class="form-control" placeholder="Inserte respuesta">
+				  </div>
+				  <button type="submit" class="btn btn-primary">Responder</button>
+				</form>
+			</div>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+
+<footer class="sticky-footer">
+		<div class="container">
+			<div class="text-center">
+				<small>Copyright  © InciManager_e4a 2018</small>
+			</div>
+		</div>
+	</footer>
+<script src="/assets/vendor/jquery/jquery.min.js"></script>
+	<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- Core plugin JavaScript-->
+	<script src="/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+	<!-- Page level plugin JavaScript-->
+    <script src="/assets/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="/assets/vendor/datatables/dataTables.bootstrap4.js"></script>
+	<!-- Custom scripts for all pages-->
+	<script src="/assets/js/sb-admin.min.js"></script>
+	<!-- Custom scripts for this page-->
+    <script src="/assets/js/sb-admin-datatables.min.js"></script>
+</body>
+</html>
