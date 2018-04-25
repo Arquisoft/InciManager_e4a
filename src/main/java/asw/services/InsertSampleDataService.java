@@ -1,19 +1,13 @@
 package asw.services;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import asw.dbManagement.entities.Agent;
-import asw.dbManagement.entities.Incidence;
 import asw.dbManagement.entities.LatLong;
-import asw.dbManagement.entities.Notification;
 import asw.dbManagement.entities.Operator;
-import asw.dbManagement.entities.State;
 
 @Service
 public class InsertSampleDataService {
