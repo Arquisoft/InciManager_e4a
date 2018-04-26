@@ -76,6 +76,11 @@ public class Incidence {
 		this(name, latLng);
 		this.setAgent(agent);
 	}
+	public Incidence(String name, LatLong latLng, Agent agent, String description) {
+		this(name, latLng);
+		this.setAgent(agent);
+		this.setInciDescription(description);
+	}
 
 
 	public Incidence(Agent agent, String inciName, String inciDescription, LatLong location, Set<String> tags,

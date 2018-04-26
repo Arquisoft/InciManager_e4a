@@ -1,18 +1,18 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head">
+<head th:replace="/fragments/head">
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-	<nav th:replace="fragments/nav" />
+	<nav th:replace="/fragments/nav" />
 	<div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <div class="container-fluid">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item">InciManager</li>
+				<li class="breadcrumb-item" href = "/">Incidence Manager</li>
 				<li class="breadcrumb-item active">Creación de incidencias</li>
 			</ol>
 			
-			<h1>Seguimiento incidencias</h1>
+			<h1>Chatbot</h1>
       <!-- Example DataTables Card-->
       <div class="card mb-3">
         <div class="card-body">
@@ -49,13 +49,7 @@
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
 
-<footer class="sticky-footer">
-		<div class="container">
-			<div class="text-center">
-				<small>Copyright  © InciManager_e4a 2018</small>
-			</div>
-		</div>
-	</footer>
+<footer th:replace = "/fragments/footer"></footer>
 <script src="/assets/vendor/jquery/jquery.min.js"></script>
 	<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<!-- Core plugin JavaScript-->
