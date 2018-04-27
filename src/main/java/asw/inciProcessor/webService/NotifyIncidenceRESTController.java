@@ -33,6 +33,8 @@ public class NotifyIncidenceRESTController {
 
 	@Autowired
 	private IncidencesService incidenceService;
+	
+	@Autowired
 	private KafkaProducer kafka;
 	
 	@Autowired
@@ -81,11 +83,11 @@ public class NotifyIncidenceRESTController {
 		notification.setDescription("Incidencia con id: " + incidence.getId());
 		notification.setOperator(operator);
 		
-		notifactionService.addIncident(notification);
+		notification = notifactionService.addIncident(notification);
 		
 		
 		
-		//kafka.sendNuevaIncidencia(notification);
+		kafka.sendNuevaNotificacion(notification);
 		
 		return new ResponseEntity<RespuestaNotifyIncidenceREST>(new RespuestaNotifyIncidenceREST(incidence), HttpStatus.OK);
 		

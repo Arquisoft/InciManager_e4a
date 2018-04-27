@@ -16,7 +16,7 @@ import asw.dbManagement.entities.Agent;
 import asw.dbManagement.entities.Incidence;
 import asw.dbManagement.entities.LatLong;
 
-public class Deserializer extends JsonDeserializer<Incidence> {
+public class IncidenceDeserializer extends JsonDeserializer<Incidence> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Incidence deserialize(JsonParser parser, DeserializationContext context)

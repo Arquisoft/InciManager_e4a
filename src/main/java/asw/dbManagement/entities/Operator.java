@@ -158,4 +158,9 @@ public class Operator {
 	public List<Incidence> getIncCANCEL() {
 		return this.getIncByState(State.CANCELLED);
 	}
+
+	public Long getID() {
+		// TODO Auto-generated method stub
+		return id; 
+	}
 }

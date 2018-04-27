@@ -23,12 +23,12 @@ import javax.persistence.OneToOne;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import asw.json.Deserializer;
-import asw.json.Serializer;
+import asw.json.IncidenceDeserializer;
+import asw.json.IncidenceSerializer;
 import utils.IncidentProperties2Json;
 
-@JsonDeserialize(using = Deserializer.class)
-@JsonSerialize(using = Serializer.class)
+@JsonDeserialize(using = IncidenceDeserializer.class)
+@JsonSerialize(using = IncidenceSerializer.class)
 @Entity
 public class Incidence {
 

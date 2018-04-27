@@ -5,9 +5,9 @@ import asw.dbManagement.entities.Notification;
 
 public interface KafkaProducer {
 	
-	public void sendNuevaIncidencia(Notification notification);
+	public void sendNuevaNotificacion(Notification notification);
 
-	public void sendNuevaIncidencia(Incidence incidence);
+	public void sendNuevaNotificacion(Incidence incidence);
 
 
 	

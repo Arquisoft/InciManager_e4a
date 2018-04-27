@@ -6,14 +6,17 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
+import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
+
+import com.google.gson.Gson;
 
 import asw.Kafka.Util.Topics;
 import asw.dbManagement.entities.Incidence;
 import asw.dbManagement.entities.Notification;
 
-
+@Service
 public class KafkaProducerImpl implements KafkaProducer {
 
 	
@@ -21,15 +24,17 @@ public class KafkaProducerImpl implements KafkaProducer {
 
 	private KafkaTemplate<String, String> kafkaTemplate;
 
+	private Gson gson; 
 	@Autowired
 	public KafkaProducerImpl(KafkaTemplate<String, String> kafkaTemplate) {
 		this.kafkaTemplate = kafkaTemplate;
+		this.gson = new Gson(); 
 	}
 	
 	
 	@Override
-	public void sendNuevaIncidencia(Notification notification) {
-		send(Topics.NEW_INDIDENCE, "{ \"Nueva incidencia con id\":\"" + notification + "\"}");
+	public void sendNuevaNotificacion(Notification notification) {
+		send(Topics.NEW_INDIDENCE, gson.toJson(notification));
 		
 	}
 	
@@ -52,7 +57,7 @@ public class KafkaProducerImpl implements KafkaProducer {
 
 
 	@Override
-	public void sendNuevaIncidencia(Incidence incidence) {
+	public void sendNuevaNotificacion(Incidence incidence) {
 		send(Topics.NEW_INDIDENCE, "{ \"Nueva incidencia \":\"" + incidence + "\"}");
 		
 	}

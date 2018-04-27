@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import asw.dbManagement.entities.Incidence;
 
-public class Serializer extends JsonSerializer<Incidence> {
+public class IncidenceSerializer extends JsonSerializer<Incidence> {
 
 	@Override
 	public void serialize(Incidence incidence, JsonGenerator generator,
