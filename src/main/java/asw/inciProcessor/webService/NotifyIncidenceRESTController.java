@@ -52,7 +52,7 @@ public class NotifyIncidenceRESTController {
 	public ResponseEntity<RespuestaNotifyIncidenceREST> getPOSTpetition(@RequestBody(required = true) PeticionNotifyIncidenceREST peticion) {
 		
 		
-		if(!agentService.checkUserAndPass(peticion.getLogin(), peticion.getPassword())) {
+		if(agentService.checkUserAndPass(peticion.getLogin(), peticion.getPassword(), peticion.getKind()) != null) {
 			throw asw.factory.ErrorFactory.getError(asw.factory.ErrorFactory.Errors.INCORRECT_LOGIN);
 		}
 		Agent agent = agentService.getAgent(peticion.getLogin());

@@ -7,6 +7,7 @@ public class PeticionNotifyIncidenceREST {
 	
 	private String login;
 	private String password;
+	private String kind;
 	private String name;
 	private String description;
 	private List<String> location;
@@ -20,11 +21,12 @@ public class PeticionNotifyIncidenceREST {
 	
 	
 
-	public PeticionNotifyIncidenceREST(String login, String password, String name, String description,
+	public PeticionNotifyIncidenceREST(String login, String password, String kind, String name, String description,
 			List<String> location, String labels, List<String> aditionalInfo, Map<String, Object> properties) {
 		super();
 		this.login = login;
 		this.password = password;
+		this.kind = kind; 
 		this.name = name;
 		this.description = description;
 		this.location = location;
@@ -97,6 +99,13 @@ public class PeticionNotifyIncidenceREST {
 
 	public void setProperties(Map<String, Object> properties) {
 		this.mapInfo = properties;
+	}
+	
+	public String getKind() {
+		return kind; 
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
 
 	
