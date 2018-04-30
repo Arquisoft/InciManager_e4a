@@ -7,6 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import asw.json.NotificationSerializer;
+
+@JsonSerialize(using = NotificationSerializer.class)
 @Entity
 public class Notification {
 

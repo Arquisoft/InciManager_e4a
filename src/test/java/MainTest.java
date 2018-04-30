@@ -17,7 +17,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.client.RestTemplate;
 
 import asw.Application;
-import asw.dbManagement.entities.Agent;
 import asw.services.AgentsService;
 
 @SuppressWarnings("deprecation")
@@ -41,11 +40,11 @@ public class MainTest {
 		template = new TestRestTemplate();
 	}
 
-	@Test
-	public void T1domainModelEqualsTest() {
-		Agent participant1 = getAgent.getAgent("13864928P");
-		assertFalse(participant1.equals(4));
-		assertTrue(participant1.equals(participant1));
-	}
+//	@Test
+//	public void T1domainModelEqualsTest() {
+//		Agent participant1 = getAgent.getAgent("13864928P");
+//		assertFalse(participant1.equals(4));
+//		assertTrue(participant1.equals(participant1));
+//	}
 }
 

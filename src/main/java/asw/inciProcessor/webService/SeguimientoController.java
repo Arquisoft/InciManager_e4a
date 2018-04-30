@@ -4,10 +4,14 @@ package asw.inciProcessor.webService;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import asw.dbManagement.entities.AgentPO;
 import asw.dbManagement.entities.Incidence;
 import asw.dbManagement.entities.LatLong;
 import asw.dbManagement.entities.Notification;
@@ -35,7 +39,11 @@ public class SeguimientoController {
 	NotificationService notificationService;
 			
 	@RequestMapping("/seguimientoIncidencias")
-	public String seguimientoIncidencias(Model model) {
+	public String seguimientoIncidencias(HttpSession session, Model model) {
+		AgentPO agente = (AgentPO) session.getAttribute("agent");
+		if(agente == null) {
+			return "login";
+		}
 		List<Notification> notificaciones = notificationService.getNotifications();
 		if(notificaciones == null) {
 			System.out.println("KE PAZÓ");

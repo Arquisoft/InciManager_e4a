@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import asw.dbManagement.entities.Agent;
 import asw.dbManagement.entities.AgentPO;
 import asw.dbManagement.util.Assert;
 import asw.services.AgentsService;

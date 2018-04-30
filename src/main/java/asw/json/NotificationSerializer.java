@@ -25,11 +25,7 @@ public class NotificationSerializer extends JsonSerializer<Notification> {
 		Incidence incidence = notification.getIncidencia();
 		// agent info
 		generator.writeObjectFieldStart("agent");
-		generator.writeStringField("dni", incidence.getAgent().getDni());
-		generator.writeStringField("email", incidence.getAgent().getEmail());
-		generator.writeStringField("nombre", incidence.getAgent().getNombre());
-		generator.writeStringField("password", incidence.getAgent().getPassword());
-		generator.writeNumberField("type", incidence.getAgent().getType());
+		generator.writeStringField("dni", incidence.getAgent());		
 		generator.writeEndObject();
 
 		generator.writeStringField("inciName", incidence.getInciName());

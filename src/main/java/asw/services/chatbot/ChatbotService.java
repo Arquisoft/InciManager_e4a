@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import asw.dbManagement.entities.AgentPO;
 import asw.dbManagement.entities.Incidence;
 import asw.dbManagement.entities.LatLong;
 import asw.dbManagement.entities.Notification;
@@ -20,7 +21,7 @@ public class ChatbotService {
 	private int numRes = 0;
 	private List<Dupla> frases; 
 	private Preguntas preguntas;	
-	
+	private AgentPO agent;
 	@Autowired 
 	IncidencesService incidenceService; 
 	
@@ -32,12 +33,13 @@ public class ChatbotService {
 	
 	public ChatbotService() {
 		preguntas = new Preguntas();
-		init(); 
+		init(null); 
 	}
 	
-	public void init() {
+	public void init(AgentPO agente) {
 		numRes = 0;
 		frases = new ArrayList<Dupla>();
+		this.agent = agente;
 		System.out.println("Chatbot inicializado");
 	}
 	public boolean next() {
@@ -59,7 +61,7 @@ public class ChatbotService {
 
 	public Notification getSummary() {
 		Incidence incidencia = new Incidence(); 
-		//incidencia.setAgent(); // Nos falta el login
+		incidencia.setAgent(agent.id); // Nos falta el login
 		incidencia.setInciName(frases.get(0).respuesta);
 		incidencia.setInciDescription(frases.get(1).respuesta);
 		LatLong latlong = new LatLong(frases.get(2).respuesta,frases.get(3).respuesta);

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import asw.Kafka.KafkaProducer;
-import asw.dbManagement.entities.Agent;
+import asw.dbManagement.entities.AgentPO;
 import asw.dbManagement.entities.Incidence;
 import asw.dbManagement.entities.LatLong;
 import asw.dbManagement.entities.Notification;
@@ -51,11 +51,11 @@ public class NotifyIncidenceRESTController {
 			"Accept=application/xml" }, produces = { "application/json", "text/xml" })
 	public ResponseEntity<RespuestaNotifyIncidenceREST> getPOSTpetition(@RequestBody(required = true) PeticionNotifyIncidenceREST peticion) {
 		
-		
-		if(agentService.checkUserAndPass(peticion.getLogin(), peticion.getPassword(), peticion.getKind()) != null) {
+		AgentPO agent = agentService.checkUserAndPass(peticion.getLogin(), peticion.getPassword(), peticion.getKind());
+		if(agent == null) {
 			throw asw.factory.ErrorFactory.getError(asw.factory.ErrorFactory.Errors.INCORRECT_LOGIN);
 		}
-		Agent agent = agentService.getAgent(peticion.getLogin());
+		
 	
 		System.out.println(peticion.getName());
 		System.out.println(peticion.getDescription());
@@ -73,7 +73,7 @@ public class NotifyIncidenceRESTController {
 		}
 			
 		
-		Incidence incidence = new Incidence(agent, peticion.getName(),
+		Incidence incidence = new Incidence(agent.id, peticion.getName(),
 				peticion.getDescription(), ll,  labels, peticion.getMoreInfo(), peticion.getProperties());
 		
 		Operator operator = operatorService.assignOperator();
@@ -87,7 +87,7 @@ public class NotifyIncidenceRESTController {
 		
 		
 		
-		kafka.sendNuevaNotificacion(notification);
+		//kafka.sendNuevaNotificacion(notification);
 		
 		return new ResponseEntity<RespuestaNotifyIncidenceREST>(new RespuestaNotifyIncidenceREST(incidence), HttpStatus.OK);
 		

@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Convert;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -16,19 +15,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import asw.json.IncidenceDeserializer;
-import asw.json.IncidenceSerializer;
 import utils.IncidentProperties2Json;
 
-@JsonDeserialize(using = IncidenceDeserializer.class)
-@JsonSerialize(using = IncidenceSerializer.class)
+
 @Entity
 public class Incidence {
 
@@ -41,9 +32,8 @@ public class Incidence {
 
 	private LatLong location;
 
-	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "agent_id")
-	private Agent agent;
+	
+	private String agent;
 
 	@ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
 	private Set<String> tags = new HashSet<String>();
@@ -72,18 +62,18 @@ public class Incidence {
 		this.location = location;
 	}
 
-	public Incidence(String name, LatLong latLng, Agent agent) {
+	public Incidence(String name, LatLong latLng, String agent) {
 		this(name, latLng);
 		this.setAgent(agent);
 	}
-	public Incidence(String name, LatLong latLng, Agent agent, String description) {
+	public Incidence(String name, LatLong latLng, String agent, String description) {
 		this(name, latLng);
 		this.setAgent(agent);
 		this.setInciDescription(description);
 	}
 
 
-	public Incidence(Agent agent, String inciName, String inciDescription, LatLong location, Set<String> tags,
+	public Incidence(String agent, String inciName, String inciDescription, LatLong location, Set<String> tags,
 			List<String> moreInfo, Map<String, Object> properties) {
 		this.agent = agent;
 		this.inciName = inciName;
@@ -157,11 +147,11 @@ public class Incidence {
 		this.state = state;
 	}
 
-	public Agent getAgent() {
+	public String getAgent() {
 		return agent;
 	}
 
-	public void setAgent(Agent agent) {
+	public void setAgent(String agent) {
 		this.agent = agent;
 	}
 

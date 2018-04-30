@@ -8,7 +8,6 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import asw.dbManagement.entities.Agent;
 import asw.dbManagement.entities.Incidence;
 import asw.dbManagement.entities.LatLong;
 import asw.dbManagement.entities.Notification;
@@ -17,9 +16,7 @@ import asw.dbManagement.entities.State;
 
 @Service
 public class InsertSampleDataService {
-	
-	@Autowired
-	AgentsService agentsService;
+		
 	
 	@Autowired
 	IncidencesService incidencesService;
@@ -33,21 +30,17 @@ public class InsertSampleDataService {
 	@PostConstruct
 	public void init() {
 		
-		Agent agente1 = new Agent("13864928A", "paco@gmail.com", new LatLong("43.518197", "-5.641936"), "paco", "123456", 1); 
-		Agent agente2 = new Agent("13864928B", "marta@gmail.com", new LatLong("43.518197", "-5.641936"), "marta", "123456", 1); 
-		Agent agente3 = new Agent("13864928C", "luis@gmail.com", new LatLong("43.518197", "-5.641936"), "luis", "123456", 2); 
-		Agent agente4 = new Agent("13864928D", "carla@gmail.com", new LatLong("43.518197", "-5.641936"), "carla", "123456", 2); 
-		Agent agente5 = new Agent("13864928E", "ramon@gmail.com", new LatLong("43.518197", "-5.641936"), "ramon", "123456", 3); 
+		String agente1 = "13864928A"; 
+		String agente2 = "13864928B"; 
+		String agente3 = "13864928C"; 
+		String agente4 = "13864928D"; 
+		String agente5 = "13864928E"; 
 		Operator op1 = new Operator("ivan@gmail.com","ivan", "123456", 1); 
 		Operator op2 = new Operator("antonio@gmail.com","antonio", "123456", 1); 
 		Operator op3 = new Operator("hugo@gmail.com","hugo", "123456", 1); 
 		Operator op4 = new Operator("mirza@gmail.com","mirza", "123456", 1); 
 		Operator op5 = new Operator("pasadores@gmail.com","pasadores", "123456", 1);
-		agentsService.addAgent(agente1);
-		agentsService.addAgent(agente2);
-		agentsService.addAgent(agente3);
-		agentsService.addAgent(agente4);
-		agentsService.addAgent(agente5);
+		
 		operatorService.addOperator(op1);
 		operatorService.addOperator(op2);
 		operatorService.addOperator(op3);
