@@ -28,6 +28,7 @@ import asw.services.IncidencesService;
 import asw.services.NotificationService;
 import asw.services.OperatorService;
 
+
 @RestController
 public class NotifyIncidenceRESTController {
 
@@ -86,8 +87,7 @@ public class NotifyIncidenceRESTController {
 		notification = notifactionService.addIncident(notification);
 		
 		
-		
-		//kafka.sendNuevaNotificacion(notification);
+		kafka.sendNuevaNotificacion(notification);
 		
 		return new ResponseEntity<RespuestaNotifyIncidenceREST>(new RespuestaNotifyIncidenceREST(incidence), HttpStatus.OK);
 		

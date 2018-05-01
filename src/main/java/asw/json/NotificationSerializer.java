@@ -1,72 +1,61 @@
 package asw.json;
 
-import java.io.IOException;
+import java.lang.reflect.Type;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
-
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import asw.dbManagement.entities.Incidence;
 import asw.dbManagement.entities.Notification;
 
-public class NotificationSerializer extends JsonSerializer<Notification> {
-
+public class NotificationSerializer implements JsonSerializer<Notification> {	
+	
 	@Override
-	public void serialize(Notification notification, JsonGenerator generator, SerializerProvider provider)
-			throws IOException, JsonProcessingException {
-
-		generator.writeStartObject();
-
-		generator.writeStringField("id", String.valueOf(notification.getId()));
-		generator.writeStringField("descripcion", notification.getDescription());
-
-		generator.writeObjectFieldStart("incidencia");
-		Incidence incidence = notification.getIncidencia();
-		// agent info
-		generator.writeObjectFieldStart("agent");
-		generator.writeStringField("dni", incidence.getAgent());		
-		generator.writeEndObject();
-
-		generator.writeStringField("inciName", incidence.getInciName());
-
-		// location
-		generator.writeObjectFieldStart("location");
-		generator.writeStringField("lat", incidence.getLocation().latitude);
-		generator.writeStringField("lon", incidence.getLocation().longitude);
-		generator.writeEndObject();
-
-		// tags
-		generator.writeArrayFieldStart("tags");
+	public JsonElement serialize(Notification src, Type typeOfSrc, JsonSerializationContext context) {
+		
+		JsonObject object = new JsonObject();
+		object.addProperty("id", src.getId());
+		object.addProperty("descripcion", src.getDescription());
+		
+		JsonObject incidencia = new JsonObject(); 
+		Incidence incidence = src.getIncidencia();
+		incidencia.addProperty("agent", incidence.getAgent());
+		incidencia.addProperty("inciName", incidence.getInciName());		
+		
+		
+		JsonObject location = new JsonObject();
+		location.addProperty("lat", incidence.getLocation().latitude );
+		location.addProperty("lon", incidence.getLocation().longitude );
+		incidencia.add("location", location);
+		
+		JsonArray tags = new JsonArray(); 
 		for (String tag : incidence.getTags()) {
-			generator.writeString(tag);
+			tags.add(tag);
 		}
-		generator.writeEndArray();
-
-		// more info
-		generator.writeArrayFieldStart("moreInfo");
+		incidencia.add("tags", tags);
+		
+		JsonArray moreInfo = new JsonArray(); 
 		for (String info : incidence.getMoreInfo()) {
-			generator.writeString(info);
+			moreInfo.add(info);
 		}
-		generator.writeEndArray();
-
-		// properties
-		generator.writeObjectFieldStart("properties");
+		incidencia.add("moreInfo", moreInfo);
+		
+		JsonArray properties = new JsonArray(); 
 		for (String key : incidence.getProperties().keySet()) {
-			generator.writeObjectField(key, incidence.getProperties().get(key));
-		}
-		generator.writeEndObject();
-
-		generator.writeEndObject();
-
-		generator.writeObjectFieldStart("operator");
-		generator.writeStringField("id", String.valueOf(notification.getOperator().getID()));
-		generator.writeStringField("name", notification.getOperator().getOperatorname());
-		generator.writeStringField("email", notification.getOperator().getEmail());
-		generator.writeEndObject();
-
-		generator.writeEndObject();
-
+			moreInfo.add((String)incidence.getProperties().get(key));
+		}		
+		incidencia.add("properties", properties);
+		
+		object.add("incidence", incidencia);
+		
+		JsonObject operator = new JsonObject(); 
+		operator.addProperty("id", src.getOperator().getID());
+		operator.addProperty("name", src.getOperator().getOperatorname());
+		operator.addProperty("email", src.getOperator().getEmail());
+		object.add("operator", operator);
+		return object;
 	}
 
 }

@@ -43,9 +43,10 @@ Pasos para ejecutar:
 
 # Rest
 
- {
-	"login": "13864928A",
+{
+	"login": "13864928P",
 	"password": "123456",
+  	"kind": "Person",
 	"name": "nombreIncidencia2",
 	"description": "descripcionIncidencia",
 	"location": ["11.111111","-2.222222"],

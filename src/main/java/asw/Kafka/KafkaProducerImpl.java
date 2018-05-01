@@ -11,10 +11,12 @@ import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import asw.Kafka.Util.Topics;
 import asw.dbManagement.entities.Incidence;
 import asw.dbManagement.entities.Notification;
+import asw.json.NotificationSerializer;
 
 @Service
 public class KafkaProducerImpl implements KafkaProducer {
@@ -34,7 +36,17 @@ public class KafkaProducerImpl implements KafkaProducer {
 	
 	@Override
 	public void sendNuevaNotificacion(Notification notification) {
-		send(Topics.NEW_INDIDENCE, gson.toJson(notification));
+		
+GsonBuilder gsonBuilder = new GsonBuilder() ;
+		
+		NotificationSerializer serializer = new NotificationSerializer();	
+		
+		gsonBuilder.registerTypeAdapter(Notification.class, serializer);
+		
+		Gson gson = gsonBuilder.create();
+		String str = gson.toJson(notification);
+		
+		send(Topics.NEW_INDIDENCE, str);
 		
 	}
 	

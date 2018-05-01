@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import asw.Kafka.KafkaProducer;
 import asw.dbManagement.entities.AgentPO;
 import asw.dbManagement.entities.Incidence;
 import asw.dbManagement.entities.LatLong;
@@ -27,6 +28,9 @@ public class ChatbotService {
 	
 	@Autowired
 	OperatorService operatorService;
+	
+	@Autowired
+	private KafkaProducer kafka;
 	
 	@Autowired
 	NotificationService notificationService;
@@ -83,6 +87,8 @@ public class ChatbotService {
 		notification.setOperator(operator);
 		
 		notification = notificationService.addIncident(notification);
+		
+		kafka.sendNuevaNotificacion(notification);
 		return notification;
 	}
 }
