@@ -28,6 +28,12 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-test</artifactId>
+			<version>1.4.3.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
 		
 		<dependency>
 			<groupId>org.json</groupId>
