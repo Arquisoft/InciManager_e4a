@@ -2,6 +2,8 @@ package asw.inciProcessor.webService;
 
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import asw.dbManagement.entities.Incidence;
 import asw.dbManagement.entities.LatLong;
 import asw.dbManagement.entities.Notification;
 import asw.dbManagement.entities.Operator;
+import asw.dbManagement.util.Assert;
 import asw.inciProcessor.webService.request.PeticionNotifyIncidenceREST;
 import asw.inciProcessor.webService.responses.RespuestaNotifyIncidenceREST;
 import asw.inciProcessor.webService.responses.errors.ErrorResponse;
@@ -27,9 +30,6 @@ import asw.services.AgentsService;
 import asw.services.IncidencesService;
 import asw.services.NotificationService;
 import asw.services.OperatorService;
-import asw.dbManagement.util.Assert;
-import asw.factory.ErrorFactory;
-import asw.factory.ErrorFactory.Errors;
 
 
 @RestController
@@ -49,6 +49,7 @@ public class NotifyIncidenceRESTController {
 	
 	@Autowired
 	private NotificationService notifactionService;
+	
 
 
 	@RequestMapping(value = "/notify", method = RequestMethod.POST, headers = { "Accept=application/json",
@@ -61,29 +62,39 @@ public class NotifyIncidenceRESTController {
 		if(agent == null) {
 			throw asw.factory.ErrorFactory.getError(asw.factory.ErrorFactory.Errors.INCORRECT_LOGIN);
 		}
+
+		String nombreIncidencia = null;
+		if (!Assert.isNameIncidenceEmpty(peticion.getName()))
+			nombreIncidencia = peticion.getName();
+
+		String descripcionIncidencia = null;
+		if (!Assert.isDescriptionIncidenceEmpty(peticion.getDescription()))
+			descripcionIncidencia = peticion.getDescription();
 		
-		/*isNameIncidenceEmpty(peticion.getName());
-		isDescriptionIncidenceEmpty(peticion.getDescription());
-		isLocationIncidenceInvalid(peticion.getLocation());*/
-	
-		System.out.println(peticion.getName());
-		System.out.println(peticion.getDescription());
-		System.out.println(peticion.getLocation());
-		System.out.println(peticion.getLabels());
-		System.out.println(peticion.getMoreInfo());
-		System.out.println(peticion.getProperties());
-		
-		LatLong ll = new LatLong(peticion.getLocation().get(0),peticion.getLocation().get(1));
+		LatLong ll = null;
+		if (!Assert.isLocationIncidenceInvalid(peticion.getLocation()))
+			ll = new LatLong(peticion.getLocation().get(0),peticion.getLocation().get(1));
 		
 		Set<String> labels = new HashSet<String>();
-		String[] parts = peticion.getLabels().split(",");
-		for (int i=0; i< parts.length;i++) {
-			labels.add(parts[i]);
-		}
-			
+		if (!Assert.isLabelsIncidenceInvalid(peticion.getLabels())) {
+			String[] parts = peticion.getLabels().split(",");
+			for (int i=0; i< parts.length;i++) {
+				labels.add(parts[i]);
+			}
+		}	
 		
-		Incidence incidence = new Incidence(agent.id, peticion.getName(),
-				peticion.getDescription(), ll,  labels, peticion.getMoreInfo(), peticion.getProperties());
+		List<String> aditionalInfo = null;
+		if (!Assert.isMoreInfoIncidenceInvalid(peticion.getMoreInfo())) {
+			aditionalInfo = peticion.getMoreInfo();
+		}
+		
+		Map<String, Object> properties = null;
+		if (!Assert.isPropertiesInvalid(peticion.getProperties()))
+			properties = peticion.getProperties();
+
+		
+		Incidence incidence = new Incidence(agent.id, nombreIncidencia,
+				descripcionIncidencia, ll,  labels, aditionalInfo, properties);
 		
 		Operator operator = operatorService.assignOperator();
 		incidence = incidenceService.addIncidence(incidence);

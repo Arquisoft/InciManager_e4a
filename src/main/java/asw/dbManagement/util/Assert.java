@@ -1,6 +1,9 @@
 package asw.dbManagement.util;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import com.google.gson.Gson;
 
@@ -67,18 +70,46 @@ public class Assert {
 			throw ErrorFactory.getError(Errors.INVALID_LOCATION);
 		else if(location.get(1).toString().trim().isEmpty())
 			throw ErrorFactory.getError(Errors.INVALID_LOCATION);
-		else if(location.get(0).toString().matches("-?\\d+(\\.\\d+)?"))
+		else if(location.get(0).toString().matches("^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?),\\s*[-+]?(180(\\.0+)?|((1[0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$"))
 			throw ErrorFactory.getError(Errors.INVALID_LOCATION);
-		else if(location.get(1).toString().matches("-?\\d+(\\.\\d+)?"))
+		else if(location.get(1).toString().matches("^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?),\\s*[-+]?(180(\\.0+)?|((1[0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$"))
 			throw ErrorFactory.getError(Errors.INVALID_LOCATION);
 		else
 			return false;
 		
 	}
 	
+	public static boolean isLabelsIncidenceInvalid(String stringLabels) {
+		Set<String> labels = new HashSet<String>();
+		String[] parts = stringLabels.split(",");
+		for (int i=0; i< parts.length;i++) {
+			if(parts[i].toString().trim().isEmpty())
+				throw ErrorFactory.getError(Errors.INVALID_LABELS);
+			else
+			    labels.add(parts[i]);
+		}
+			
+		return false;
+	}
 	
+	public static boolean isMoreInfoIncidenceInvalid(List<String> info) {
+		for (int i=0; i< info.size();i++) {
+			if(info.get(i).trim().isEmpty())
+				throw ErrorFactory.getError(Errors.INVALID_MOREINFO);
+				
+		}
+		return false;
+	}
 	
-	
+	public static boolean isPropertiesInvalid(Map<String, Object> properties) {
+		for (String key :  properties.keySet()) {
+			if(key.toString().trim().isEmpty())
+				throw ErrorFactory.getError(Errors.INVALID_PROPERTIES);
+			if(properties.get(key).toString().trim().isEmpty())
+				throw ErrorFactory.getError(Errors.INVALID_PROPERTIES);
+		}
+		return false;
+	}
 
 
 }

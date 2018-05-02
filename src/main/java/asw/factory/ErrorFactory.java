@@ -10,7 +10,10 @@ import asw.inciProcessor.webService.responses.errors.RequiredPasswordErrorRespon
 import asw.inciProcessor.webService.responses.errors.RequiredNameIncidenceErrorResponse;
 import asw.inciProcessor.webService.responses.errors.RequiredDescriptionIncidenceErrorResponse;
 import asw.inciProcessor.webService.responses.errors.InvalidLocationIncidenceErrorResponse;
+import asw.inciProcessor.webService.responses.errors.InvalidLabelsIncidenceErrorResponse;
+import asw.inciProcessor.webService.responses.errors.InvalidMoreInfoIncidenceErrorResponse;
 import asw.inciProcessor.webService.responses.errors.InvalidPetitionErrorResponse;
+import asw.inciProcessor.webService.responses.errors.InvalidPropertiesIncidenceErrorResponse;
 import asw.inciProcessor.webService.responses.errors.UnknownErrorResponse;
 import asw.inciProcessor.webService.responses.errors.UserNotFoundResponse;
 
@@ -29,7 +32,10 @@ public class ErrorFactory {
 		REQUIRED_NAMEINCIDENCE, 
 		REQUIRED_DESCRIPTIONINCIDENCE, 
 		INVALID_LOCATION,
-		INVALID_PETITION
+		INVALID_PETITION, 
+		INVALID_LABELS, 
+		INVALID_MOREINFO, 
+		INVALID_PROPERTIES
 
 	}
 
@@ -62,7 +68,13 @@ public class ErrorFactory {
 		case INVALID_LOCATION:
 			return new InvalidLocationIncidenceErrorResponse();		
 		case INVALID_PETITION:
-			return new InvalidPetitionErrorResponse();	
+			return new InvalidPetitionErrorResponse();
+		case INVALID_LABELS:
+			return new InvalidLabelsIncidenceErrorResponse();	
+		case INVALID_MOREINFO:
+			return new InvalidMoreInfoIncidenceErrorResponse();	
+		case INVALID_PROPERTIES:
+			return new InvalidPropertiesIncidenceErrorResponse();		
 		default:// en caso de no conocer el error.
 			return new UnknownErrorResponse();
 		}
