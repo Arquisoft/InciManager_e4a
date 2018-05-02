@@ -1,12 +1,7 @@
 package test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -16,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.http.entity.ContentType;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -35,8 +29,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import asw.Application;
-import asw.dbManagement.entities.AgentPO;
-import asw.dbManagement.entities.LatLong;
 import asw.services.AgentsService;
 
 
@@ -57,8 +49,7 @@ public class MainTest {
     @SuppressWarnings("rawtypes")
 	private HttpMessageConverter mappingJackson2HttpMessageConverter;
 
-//	private URL base;
-//	private TestRestTemplate template;
+
     @Autowired
     void setConverters(HttpMessageConverter<?>[] converters) {
 
@@ -83,7 +74,7 @@ public class MainTest {
 
 	
 	@Test
-    public void T02incorrectLoginJSON() throws Exception {
+    public void T01notifyIncidenceSuccess() throws Exception {
 		 Map<String, Object> payload = new HashMap<>();
 	        Map<String, Object> prop = new HashMap<>();
 	        List<String> locat = new ArrayList<String>();
@@ -106,6 +97,189 @@ public class MainTest {
 	                .content(this.json(payload))
 	                .contentType(JSONContentType))
 	                .andExpect(status().isOk());
+    }
+	
+	@Test
+    public void T02incorrectLogin() throws Exception {
+		 Map<String, Object> payload = new HashMap<>();
+	        Map<String, Object> prop = new HashMap<>();
+	        List<String> locat = new ArrayList<String>();
+	        List<String> morinfo = new ArrayList<String>();
+	        locat.add("11.111111");locat.add("11.111111");
+	        morinfo.add("adInfo1");
+	        prop.put("key1","value1");
+	        prop.put("key2","value2");
+	        
+			payload.put("login", "gonzi");
+			payload.put("password", "123456");
+			payload.put("kind", "Person");
+			payload.put("name", "nombreIncidencia");
+			payload.put("description", "descripcion de la incidencia");
+			payload.put("location", locat);
+			payload.put("labels", "label1,label2");
+			payload.put("moreInfo", morinfo);
+	        payload.put("properties", prop);   
+	        mockMvc.perform(post("/notify")
+	                .content(this.json(payload))
+	                .contentType(JSONContentType))
+	                .andExpect(status().isNotFound());
+
+    }
+	
+	@Test
+    public void T03incorrectPassword() throws Exception {
+		 Map<String, Object> payload = new HashMap<>();
+	        Map<String, Object> prop = new HashMap<>();
+	        List<String> locat = new ArrayList<String>();
+	        List<String> morinfo = new ArrayList<String>();
+	        locat.add("11.111111");locat.add("11.111111");
+	        morinfo.add("adInfo1");
+	        prop.put("key1","value1");
+	        prop.put("key2","value2");
+	        
+			payload.put("login", "13864928P");
+			payload.put("password", "1234566666");
+			payload.put("kind", "Person");
+			payload.put("name", "nombreIncidencia");
+			payload.put("description", "descripcion de la incidencia");
+			payload.put("location", locat);
+			payload.put("labels", "label1,label2");
+			payload.put("moreInfo", morinfo);
+	        payload.put("properties", prop);   
+	        mockMvc.perform(post("/notify")
+	                .content(this.json(payload))
+	                .contentType(JSONContentType))
+	                .andExpect(status().isNotFound());
+    }
+	
+	@Test
+    public void T04incorrectKind() throws Exception {
+		 Map<String, Object> payload = new HashMap<>();
+	        Map<String, Object> prop = new HashMap<>();
+	        List<String> locat = new ArrayList<String>();
+	        List<String> morinfo = new ArrayList<String>();
+	        locat.add("11.111111");locat.add("11.111111");
+	        morinfo.add("adInfo1");
+	        prop.put("key1","value1");
+	        prop.put("key2","value2");
+	        
+			payload.put("login", "13864928P");
+			payload.put("password", "123456");
+			payload.put("kind", "Sensor");
+			payload.put("name", "nombreIncidencia");
+			payload.put("description", "descripcion de la incidencia");
+			payload.put("location", locat);
+			payload.put("labels", "label1,label2");
+			payload.put("moreInfo", morinfo);
+	        payload.put("properties", prop);   
+	        mockMvc.perform(post("/notify")
+	                .content(this.json(payload))
+	                .contentType(JSONContentType))
+	                .andExpect(status().isNotFound());
+    }
+	
+	@Test
+    public void T05emptyIncidenceName() throws Exception {
+		 Map<String, Object> payload = new HashMap<>();
+	        Map<String, Object> prop = new HashMap<>();
+	        List<String> locat = new ArrayList<String>();
+	        List<String> morinfo = new ArrayList<String>();
+	        locat.add("11.111111");locat.add("11.111111");
+	        morinfo.add("adInfo1");
+	        prop.put("key1","value1");
+	        prop.put("key2","value2");
+	        
+			payload.put("login", "13864928P");
+			payload.put("password", "123456");
+			payload.put("kind", "Person");
+			payload.put("name", "");
+			payload.put("description", "descripcion de la incidencia");
+			payload.put("location", locat);
+			payload.put("labels", "label1,label2");
+			payload.put("moreInfo", morinfo);
+	        payload.put("properties", prop);   
+	        mockMvc.perform(post("/notify")
+	                .content(this.json(payload))
+	                .contentType(JSONContentType))
+	                .andExpect(status().isNotFound());
+    }
+	
+	@Test
+    public void T06emptyIncidenceDescription() throws Exception {
+		 Map<String, Object> payload = new HashMap<>();
+	        Map<String, Object> prop = new HashMap<>();
+	        List<String> locat = new ArrayList<String>();
+	        List<String> morinfo = new ArrayList<String>();
+	        locat.add("11.111111");locat.add("11.111111");
+	        morinfo.add("adInfo1");
+	        prop.put("key1","value1");
+	        prop.put("key2","value2");
+	        
+			payload.put("login", "13864928P");
+			payload.put("password", "123456");
+			payload.put("kind", "Person");
+			payload.put("name", "nombreIncidencia");
+			payload.put("description", "");
+			payload.put("location", locat);
+			payload.put("labels", "label1,label2");
+			payload.put("moreInfo", morinfo);
+	        payload.put("properties", prop);   
+	        mockMvc.perform(post("/notify")
+	                .content(this.json(payload))
+	                .contentType(JSONContentType))
+	                .andExpect(status().isNotFound());
+    }
+	
+	@Test
+    public void T07incorrectIncidenceLocation() throws Exception {
+		 Map<String, Object> payload = new HashMap<>();
+	        Map<String, Object> prop = new HashMap<>();
+	        List<String> locat = new ArrayList<String>();
+	        List<String> morinfo = new ArrayList<String>();
+	        locat.add("11.111111");
+	        morinfo.add("adInfo1");
+	        prop.put("key1","value1");
+	        prop.put("key2","value2");
+	        
+			payload.put("login", "13864928P");
+			payload.put("password", "123456");
+			payload.put("kind", "Person");
+			payload.put("name", "nombreIncidencia");
+			payload.put("description", "");
+			payload.put("location", locat);
+			payload.put("labels", "label1,label2");
+			payload.put("moreInfo", morinfo);
+	        payload.put("properties", prop);   
+	        mockMvc.perform(post("/notify")
+	                .content(this.json(payload))
+	                .contentType(JSONContentType))
+	                .andExpect(status().isNotFound());
+    }
+	
+	@Test
+    public void T08icorrectIncidenceLocation2() throws Exception {
+		 Map<String, Object> payload = new HashMap<>();
+	        Map<String, Object> prop = new HashMap<>();
+	        List<String> locat = new ArrayList<String>();
+	        List<String> morinfo = new ArrayList<String>();
+	        locat.add("11.111111");locat.add("11.111111");locat.add("11.111111");
+	        morinfo.add("adInfo1");
+	        prop.put("key1","value1");
+	        prop.put("key2","value2");
+	        
+			payload.put("login", "13864928P");
+			payload.put("password", "123456");
+			payload.put("kind", "Person");
+			payload.put("name", "nombreIncidencia");
+			payload.put("description", "");
+			payload.put("location", locat);
+			payload.put("labels", "label1,label2");
+			payload.put("moreInfo", morinfo);
+	        payload.put("properties", prop);   
+	        mockMvc.perform(post("/notify")
+	                .content(this.json(payload))
+	                .contentType(JSONContentType))
+	                .andExpect(status().isNotFound());
 
     }
 	
