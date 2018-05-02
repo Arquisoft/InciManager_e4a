@@ -1,3 +1,4 @@
+package test;
 import org.junit.runner.RunWith;
 
 import cucumber.api.CucumberOptions;
