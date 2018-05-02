@@ -85,6 +85,13 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-artemis</artifactId>
 	</dependency>
+	
+	<dependency>
+    	<groupId>com.google.code.gson</groupId>
+    	<artifactId>gson</artifactId>
+    	<version>2.5</version>
+	</dependency>
+	
 	<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>

@@ -27,6 +27,9 @@ import asw.services.AgentsService;
 import asw.services.IncidencesService;
 import asw.services.NotificationService;
 import asw.services.OperatorService;
+import asw.dbManagement.util.Assert;
+import asw.factory.ErrorFactory;
+import asw.factory.ErrorFactory.Errors;
 
 
 @RestController
@@ -50,13 +53,18 @@ public class NotifyIncidenceRESTController {
 
 	@RequestMapping(value = "/notify", method = RequestMethod.POST, headers = { "Accept=application/json",
 			"Accept=application/xml" }, produces = { "application/json", "text/xml" })
-	public ResponseEntity<RespuestaNotifyIncidenceREST> getPOSTpetition(@RequestBody(required = true) PeticionNotifyIncidenceREST peticion) {
+	public ResponseEntity<RespuestaNotifyIncidenceREST> getPOSTpetition(@RequestBody(required = true) PeticionNotifyIncidenceREST peticion )  throws Exception{
+		
+
 		
 		AgentPO agent = agentService.checkUserAndPass(peticion.getLogin(), peticion.getPassword(), peticion.getKind());
 		if(agent == null) {
 			throw asw.factory.ErrorFactory.getError(asw.factory.ErrorFactory.Errors.INCORRECT_LOGIN);
 		}
 		
+		/*isNameIncidenceEmpty(peticion.getName());
+		isDescriptionIncidenceEmpty(peticion.getDescription());
+		isLocationIncidenceInvalid(peticion.getLocation());*/
 	
 		System.out.println(peticion.getName());
 		System.out.println(peticion.getDescription());

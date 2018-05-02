@@ -2,10 +2,15 @@ package asw.factory;
 
 
 import asw.inciProcessor.webService.responses.errors.ErrorResponse;
+import asw.inciProcessor.webService.responses.errors.InvalidJsonErrorResponse;
 import asw.inciProcessor.webService.responses.errors.KindDoNotMatchErrorResponse;
 import asw.inciProcessor.webService.responses.errors.RequiredKindErrorResponse;
 import asw.inciProcessor.webService.responses.errors.RequiredLoginErrorResponse;
 import asw.inciProcessor.webService.responses.errors.RequiredPasswordErrorResponse;
+import asw.inciProcessor.webService.responses.errors.RequiredNameIncidenceErrorResponse;
+import asw.inciProcessor.webService.responses.errors.RequiredDescriptionIncidenceErrorResponse;
+import asw.inciProcessor.webService.responses.errors.InvalidLocationIncidenceErrorResponse;
+import asw.inciProcessor.webService.responses.errors.InvalidPetitionErrorResponse;
 import asw.inciProcessor.webService.responses.errors.UnknownErrorResponse;
 import asw.inciProcessor.webService.responses.errors.UserNotFoundResponse;
 
@@ -19,7 +24,12 @@ public class ErrorFactory {
 		USER_NOT_FOUND,
 		INCORRECT_PASSWORD_DO_NOT_MATCH,
 		INCORRECT_KIND_DO_NOT_MATCH,
-		REQUIRED_KIND
+		REQUIRED_KIND,
+		INVALID_JSON, 
+		REQUIRED_NAMEINCIDENCE, 
+		REQUIRED_DESCRIPTIONINCIDENCE, 
+		INVALID_LOCATION,
+		INVALID_PETITION
 
 	}
 
@@ -43,6 +53,16 @@ public class ErrorFactory {
 			return new RequiredKindErrorResponse();
 		case INCORRECT_KIND_DO_NOT_MATCH:
 			return new KindDoNotMatchErrorResponse();
+		case INVALID_JSON:
+			return new InvalidJsonErrorResponse();	
+		case REQUIRED_NAMEINCIDENCE:
+			return new RequiredNameIncidenceErrorResponse();
+		case REQUIRED_DESCRIPTIONINCIDENCE:
+			return new RequiredDescriptionIncidenceErrorResponse();	
+		case INVALID_LOCATION:
+			return new InvalidLocationIncidenceErrorResponse();		
+		case INVALID_PETITION:
+			return new InvalidPetitionErrorResponse();	
 		default:// en caso de no conocer el error.
 			return new UnknownErrorResponse();
 		}
