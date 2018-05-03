@@ -43,7 +43,7 @@
 				    <input th:if="${pregunta!='Introduzca propiedades adicionales de la incidencia.'}"
 				    	 type="text" name = "respuesta" class="form-control" placeholder="Inserte respuesta" required=true>
 				  </div>
-				  <span id="errorLogin" class="text-danger" th:if="${(param.error != null)}">Error al logearse: campos incorrectos</span>				  
+				  <span id="errorLogin" class="text-danger" th:if="${(param.error != null)}">Campo introducido incorrecto</span>				  
 				  <button type="submit" class="btn btn-primary">Responder</button>
 				</form>
 			</div>

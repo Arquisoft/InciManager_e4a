@@ -38,7 +38,9 @@ public class HomeController {
 		Assert.isKindEmpty(kind);
 
 		AgentPO agente = agentService.checkUserAndPass(login, password, kind);
-		
+		if(agente == null) {
+			return "redirect:/login?error";
+		}
 
 		session.setAttribute("agent", agente);
 		
