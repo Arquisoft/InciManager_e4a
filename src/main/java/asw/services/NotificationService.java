@@ -6,8 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.common.collect.Lists;
-
 import asw.dbManagement.entities.Notification;
 import asw.dbManagement.repositories.NotificationRepository;
 

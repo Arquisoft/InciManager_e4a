@@ -3,17 +3,17 @@ package asw.factory;
 
 import asw.inciProcessor.webService.responses.errors.ErrorResponse;
 import asw.inciProcessor.webService.responses.errors.InvalidJsonErrorResponse;
-import asw.inciProcessor.webService.responses.errors.KindDoNotMatchErrorResponse;
-import asw.inciProcessor.webService.responses.errors.RequiredKindErrorResponse;
-import asw.inciProcessor.webService.responses.errors.RequiredLoginErrorResponse;
-import asw.inciProcessor.webService.responses.errors.RequiredPasswordErrorResponse;
-import asw.inciProcessor.webService.responses.errors.RequiredNameIncidenceErrorResponse;
-import asw.inciProcessor.webService.responses.errors.RequiredDescriptionIncidenceErrorResponse;
-import asw.inciProcessor.webService.responses.errors.InvalidLocationIncidenceErrorResponse;
 import asw.inciProcessor.webService.responses.errors.InvalidLabelsIncidenceErrorResponse;
+import asw.inciProcessor.webService.responses.errors.InvalidLocationIncidenceErrorResponse;
 import asw.inciProcessor.webService.responses.errors.InvalidMoreInfoIncidenceErrorResponse;
 import asw.inciProcessor.webService.responses.errors.InvalidPetitionErrorResponse;
 import asw.inciProcessor.webService.responses.errors.InvalidPropertiesIncidenceErrorResponse;
+import asw.inciProcessor.webService.responses.errors.KindDoNotMatchErrorResponse;
+import asw.inciProcessor.webService.responses.errors.RequiredDescriptionIncidenceErrorResponse;
+import asw.inciProcessor.webService.responses.errors.RequiredKindErrorResponse;
+import asw.inciProcessor.webService.responses.errors.RequiredLoginErrorResponse;
+import asw.inciProcessor.webService.responses.errors.RequiredNameIncidenceErrorResponse;
+import asw.inciProcessor.webService.responses.errors.RequiredPasswordErrorResponse;
 import asw.inciProcessor.webService.responses.errors.UnknownErrorResponse;
 import asw.inciProcessor.webService.responses.errors.UserNotFoundResponse;
 
