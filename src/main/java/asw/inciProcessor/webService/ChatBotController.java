@@ -30,12 +30,14 @@ public class ChatBotController {
 	
 	
 	@RequestMapping("/responderChatbot")
-	public String respuestaChatbot(HttpSession session, @RequestParam(required = true) String respuesta, Model model) {
+	public String respuestaChatbot(HttpSession session, @RequestParam String respuesta, Model model) {
 		AgentPO agente = (AgentPO) session.getAttribute("agent");
 		if(agente == null) {
 			return "login";
 		}
-		chatbot.responder(respuesta);
+		if(!chatbot.responder(respuesta)) {
+			return "redirect:/chatbot?error";
+		}
 		if(chatbot.next()) {
 			model.addAttribute("pregunta", chatbot.pregunta());
 			model.addAttribute("duplas", chatbot.getFrases());

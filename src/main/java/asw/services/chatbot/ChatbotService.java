@@ -12,6 +12,7 @@ import asw.dbManagement.entities.Incidence;
 import asw.dbManagement.entities.LatLong;
 import asw.dbManagement.entities.Notification;
 import asw.dbManagement.entities.Operator;
+import asw.dbManagement.util.Assert;
 import asw.services.IncidencesService;
 import asw.services.NotificationService;
 import asw.services.OperatorService;
@@ -55,8 +56,19 @@ public class ChatbotService {
 		return pregunta; 
 	}
 	
-	public void responder(String respuesta) {
-		frases.add(new Dupla(preguntas.get(numRes -1), respuesta));
+	public boolean responder(String respuesta) {
+		boolean correct=false;
+		if(numRes-1==4) {		
+			correct = Assert.labelsIncidenceChatbotCorrect(respuesta) && 
+					Assert.responseChatbotEmpty(respuesta);
+		}else {
+			correct=Assert.responseChatbotEmpty(respuesta);
+		}
+		if(correct) {
+			frases.add(new Dupla(preguntas.get(numRes -1), respuesta));
+			return true;
+		}
+		return false;	
 	}
 	
 	public List<Dupla> getFrases(){

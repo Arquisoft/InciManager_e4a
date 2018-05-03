@@ -38,8 +38,12 @@
         	<form class = "navbar-form" action = "/responderChatbot">
 				  <div class="form-group">
 				    <h2 th:text= "${pregunta}"></h2>
-				    <input type="text" name = "respuesta" class="form-control" placeholder="Inserte respuesta">
+				    <input th:if="${pregunta=='Introduzca propiedades adicionales de la incidencia.'}"
+				    	 type="text" name = "respuesta" class="form-control" placeholder="Inserte respuesta">
+				    <input th:if="${pregunta!='Introduzca propiedades adicionales de la incidencia.'}"
+				    	 type="text" name = "respuesta" class="form-control" placeholder="Inserte respuesta" required=true>
 				  </div>
+				  <span id="errorLogin" class="text-danger" th:if="${(param.error != null)}">Error al logearse: campos incorrectos</span>				  
 				  <button type="submit" class="btn btn-primary">Responder</button>
 				</form>
 			</div>
@@ -61,5 +65,5 @@
 	<script src="/assets/js/sb-admin.min.js"></script>
 	<!-- Custom scripts for this page-->
     <script src="/assets/js/sb-admin-datatables.min.js"></script>
-</body>
+	</body>
 </html>

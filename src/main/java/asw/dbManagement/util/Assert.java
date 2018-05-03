@@ -110,6 +110,30 @@ public class Assert {
 		}
 		return false;
 	}
-
+	
+	public static boolean responseChatbotEmpty(String respuesta) {
+		if(respuesta.toString().trim().isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+	
+	public static boolean labelsIncidenceChatbotCorrect(String respuesta) {
+		if(!respuesta.contains(",")) {
+			if(respuesta.contains(" ")) {
+				return false;
+			}
+			return true;
+		}else if(respuesta.contains(",")) {
+			String[] parts = respuesta.split(",");
+			for (int i=0; i < parts.length;i++) {
+				if(parts[i].toString().trim().isEmpty()) {
+					return false;
+				}
+			}
+			return true;
+		}		
+		return false;
+	}
 
 }
