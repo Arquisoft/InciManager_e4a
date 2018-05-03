@@ -11,7 +11,7 @@ public class Preguntas{
 		preguntas[3] = "Introduzca la longitud en la que se ha producido la incidencia.";
 		preguntas[4] = "Introduzca las etiquetas que quiere asignarle a la incidencia. Han de estar separadas por comas.";
 		preguntas[5] = "Introduzca información adicional.  Han de estar separadas por comas.";
-		preguntas[6] = "Introduzca propiedades adicionales de la incidencia.";
+		preguntas[6] = "Introduzca propiedades adicionales de la incidencia. (Propiedad:valor,...)";
 	}
 	
 	

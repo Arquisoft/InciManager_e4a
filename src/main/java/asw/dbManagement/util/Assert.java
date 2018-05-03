@@ -127,13 +127,34 @@ public class Assert {
 		}else if(respuesta.contains(",")) {
 			String[] parts = respuesta.split(",");
 			for (int i=0; i < parts.length;i++) {
-				if(parts[i].toString().trim().isEmpty()) {
+				if(parts[i].toString().trim().isEmpty() || parts[i].toString()==null || parts[i].toString()==",") {
 					return false;
 				}
 			}
 			return true;
 		}		
 		return false;
+	}
+	
+	public static boolean propertiesIncidenceChatbotCorrect(String respuesta) {
+		String[] parts = respuesta.split(",");
+		for (int i=0; i < parts.length;i++) {
+			String[] parts2 = parts[i].split(":");
+			if(parts2.length!=2) {
+				return false;
+			}			
+			if(parts2[0].toString().trim().isEmpty() || parts2[1].toString().trim().isEmpty()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public static boolean locationIncidenceChatbotCorrect(String respuesta) {
+		if(respuesta.toString().matches("^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?),\\s*[-+]?(180(\\.0+)?|((1[0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$")) {
+			return false;
+		}
+		return true;
 	}
 
 }

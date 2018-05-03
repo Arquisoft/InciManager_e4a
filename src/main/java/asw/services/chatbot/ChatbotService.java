@@ -12,6 +12,7 @@ import asw.dbManagement.entities.Incidence;
 import asw.dbManagement.entities.LatLong;
 import asw.dbManagement.entities.Notification;
 import asw.dbManagement.entities.Operator;
+import asw.dbManagement.entities.State;
 import asw.dbManagement.util.Assert;
 import asw.services.IncidencesService;
 import asw.services.NotificationService;
@@ -58,10 +59,27 @@ public class ChatbotService {
 	
 	public boolean responder(String respuesta) {
 		boolean correct=false;
-		if(numRes-1==4) {		
+		if(numRes-1==2) {
+			correct = Assert.locationIncidenceChatbotCorrect(respuesta) &&
+					Assert.responseChatbotEmpty(respuesta);
+		}
+		else if(numRes-1==3) {
+			correct = Assert.locationIncidenceChatbotCorrect(respuesta) &&
+					Assert.responseChatbotEmpty(respuesta);
+		}
+		else if(numRes-1==4) {		
 			correct = Assert.labelsIncidenceChatbotCorrect(respuesta) && 
 					Assert.responseChatbotEmpty(respuesta);
-		}else {
+		}
+		else if(numRes-1==5){
+			correct = Assert.labelsIncidenceChatbotCorrect(respuesta) && 
+					Assert.responseChatbotEmpty(respuesta);
+		}
+		else if(numRes-1==6){
+			correct = Assert.propertiesIncidenceChatbotCorrect(respuesta) && 
+					Assert.responseChatbotEmpty(respuesta);
+		}
+		else {		
 			correct=Assert.responseChatbotEmpty(respuesta);
 		}
 		if(correct) {
@@ -77,7 +95,7 @@ public class ChatbotService {
 
 	public Notification getSummary() {
 		Incidence incidencia = new Incidence(); 
-		incidencia.setAgent(agent.id); // Nos falta el login
+		incidencia.setAgent(agent.id);
 		incidencia.setInciName(frases.get(0).respuesta);
 		incidencia.setInciDescription(frases.get(1).respuesta);
 		LatLong latlong = new LatLong(frases.get(2).respuesta,frases.get(3).respuesta);
@@ -90,7 +108,12 @@ public class ChatbotService {
 		for(String adInfo : moreInfo) {
 			incidencia.addMoreInfo(adInfo);
 		}
-		//Añadir el hashmap chulo
+		incidencia.setState(State.OPEN);
+		String[] properties = frases.get(6).respuesta.split(",");
+		for(int i=0;i<properties.length;i++) {
+			String[] properties2 = properties[i].split(":");
+			incidencia.addProperty(properties2[0], properties2[1]);
+		}
 		incidencia = incidenceService.addIncidence(incidencia);
 		Operator operator = operatorService.assignOperator();
 		Notification notification = new Notification(); 
