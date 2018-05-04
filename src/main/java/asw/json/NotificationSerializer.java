@@ -7,6 +7,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+
 import asw.dbManagement.entities.Incidence;
 import asw.dbManagement.entities.Notification;
 
