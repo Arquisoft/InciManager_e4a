@@ -14,6 +14,6 @@ build:
   steps:
     # https://github.com/wercker/step-maven
     - java/maven:
-      goals: install -DskipTests
+      goals: spring-boot:run
       cache_repo: true
       version: 3.5.2
