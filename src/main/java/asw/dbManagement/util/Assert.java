@@ -70,9 +70,9 @@ public class Assert {
 			throw ErrorFactory.getError(Errors.INVALID_LOCATION);
 		else if(location.get(1).toString().trim().isEmpty())
 			throw ErrorFactory.getError(Errors.INVALID_LOCATION);
-		else if(location.get(0).toString().matches("^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?),\\s*[-+]?(180(\\.0+)?|((1[0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$"))
-			throw ErrorFactory.getError(Errors.INVALID_LOCATION);
-		else if(location.get(1).toString().matches("^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?),\\s*[-+]?(180(\\.0+)?|((1[0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$"))
+		else if(location.get(0).toString().matches("[a-zA-ZÀ-ÿñÑ][a-zA-ZÀ-ÿñÑ0-9_]*"))
+			throw ErrorFactory.getError(Errors.INVALID_LOCATION); //^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?),\\s*[-+]?(180(\\.0+)?|((1[0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$
+		else if(location.get(1).toString().matches("[a-zA-ZÀ-ÿñÑ][a-zA-ZÀ-ÿñÑ0-9_]*"))
 			throw ErrorFactory.getError(Errors.INVALID_LOCATION);
 		else
 			return false;
@@ -151,7 +151,7 @@ public class Assert {
 	}
 	
 	public static boolean locationIncidenceChatbotCorrect(String respuesta) {
-		if(respuesta.toString().matches("^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?),\\s*[-+]?(180(\\.0+)?|((1[0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$")) {
+		if(respuesta.toString().matches("[a-zA-ZÀ-ÿñÑ][a-zA-ZÀ-ÿñÑ0-9_]*")) {
 			return false;
 		}
 		return true;
