@@ -12,7 +12,7 @@ import asw.dbManagement.entities.LoginPO;
 public class AgentsService {
 
 	public AgentPO checkUserAndPass(String user, String pass, String kind) {
-		final String uri = "http://ec2-54-245-139-175.us-west-2.compute.amazonaws.com:8081/user";
+		final String uri = "http://ec2-54-149-62-135.us-west-2.compute.amazonaws.com:8081";
 
 		RestTemplate restTemplate = new RestTemplate();
 
