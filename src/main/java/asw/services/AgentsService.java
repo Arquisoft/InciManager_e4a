@@ -32,6 +32,13 @@ public class AgentsService {
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
+			found = new AgentPO();
+			found.email = "";
+			found.id = "";
+			found.kind = "";
+			found.kindCode = "";
+			found.location = "";
+			found.nombre = "";
 		}
 
 		return found;
