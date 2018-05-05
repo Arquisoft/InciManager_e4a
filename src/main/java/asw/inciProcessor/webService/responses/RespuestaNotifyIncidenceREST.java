@@ -14,15 +14,17 @@ public class RespuestaNotifyIncidenceREST {
 	private LatLong location;
 	private State status;
 	private Long id;
+	private String operator;
 	
 	public RespuestaNotifyIncidenceREST() {}
 	
-	public RespuestaNotifyIncidenceREST(Incidence incidence) 
+	public RespuestaNotifyIncidenceREST(Incidence incidence, String operator) 
 	{
 		setName(incidence.getInciName());
 		setLocation(incidence.getLocation());
 		setStatus(incidence.getState());
 		setId(incidence.getId());
+		setOperator(operator);
 	}
 
 	public String getName() {
@@ -51,7 +53,16 @@ public class RespuestaNotifyIncidenceREST {
 	public void setStatus(State state) {
 		this.status = state;
 	}
-
+	
+	public String getOperator() {
+		return operator;
+	}
+	
+	@XmlElement
+	public void setOperator(String operator) {
+		this.operator = operator;
+	}
+	
 	public Long getId() {
 		return id;
 	}

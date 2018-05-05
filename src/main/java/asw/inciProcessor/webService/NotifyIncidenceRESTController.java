@@ -117,7 +117,7 @@ public class NotifyIncidenceRESTController {
 		
 		kafka.sendNuevaNotificacion(notification);
 		
-		return new ResponseEntity<RespuestaNotifyIncidenceREST>(new RespuestaNotifyIncidenceREST(incidence), HttpStatus.OK);
+		return new ResponseEntity<RespuestaNotifyIncidenceREST>(new RespuestaNotifyIncidenceREST(incidence, operator.getEmail()), HttpStatus.OK);
 		
 	}
 
