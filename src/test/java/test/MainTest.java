@@ -38,8 +38,6 @@ import asw.services.AgentsService;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MainTest {
 	
-	@Autowired
-	private AgentsService agentService;
 
 	@Autowired
     private WebApplicationContext wac;
