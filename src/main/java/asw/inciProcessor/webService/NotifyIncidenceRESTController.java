@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.kafka.clients.producer.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import asw.Kafka.KafkaProducer;
 import asw.dbManagement.entities.AgentPO;
@@ -26,6 +30,7 @@ import asw.dbManagement.util.Assert;
 import asw.inciProcessor.webService.request.PeticionNotifyIncidenceREST;
 import asw.inciProcessor.webService.responses.RespuestaNotifyIncidenceREST;
 import asw.inciProcessor.webService.responses.errors.ErrorResponse;
+import asw.json.NotificationSerializer;
 import asw.services.AgentsService;
 import asw.services.IncidencesService;
 import asw.services.NotificationService;
@@ -44,6 +49,7 @@ public class NotifyIncidenceRESTController {
 	@Autowired
 	AgentsService agentService;
 	
+		
 	@Autowired
 	private OperatorService operatorService;
 	
@@ -106,9 +112,12 @@ public class NotifyIncidenceRESTController {
 		notification = notifactionService.addIncident(notification);
 		
 		
+		
+		
+		
 		kafka.sendNuevaNotificacion(notification);
 		
-		return new ResponseEntity<RespuestaNotifyIncidenceREST>(new RespuestaNotifyIncidenceREST(incidence), HttpStatus.OK);
+		return new ResponseEntity<RespuestaNotifyIncidenceREST>(new RespuestaNotifyIncidenceREST(incidence, operator.getEmail()), HttpStatus.OK);
 		
 	}
 

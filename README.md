@@ -43,17 +43,17 @@ Pasos para ejecutar:
 
 # Rest
 
-{
-	"login": "13864928P",
-	"password": "123456",
-  	"kind": "Person",
-	"name": "nombreIncidencia2",
-	"description": "descripcionIncidencia",
-	"location": ["11.111111","-2.222222"],
-	"labels": "label1,label2,label3",
-   	"moreInfo": ["adInfo1","adInfo2","adInfo3"],
-    "properties" : {
-      "key1":"value1",
-      "key2":"value2"
-    }
+{ 
+	"login": "13864928P", 
+	"password": "123456", 
+	"kind": "Person", 
+	"name": "nombreIncidencia2", 
+	"description": "descripcionIncidencia", 
+	"location": ["11.111111","-2.222222"], 
+	"labels": "label1,label2,label3", 
+	"moreInfo": ["adInfo1","adInfo2","adInfo3"], 
+	"properties" : { 
+		"key1":"value1", 
+		"key2":"value2" 
+	} 
 }
