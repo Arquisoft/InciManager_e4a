@@ -41,7 +41,6 @@ public class HomeController {
 		if(agente == null) {
 			return "redirect:/login?error";
 		}
-
 		session.setAttribute("agent", agente);
 		
 		return "index";

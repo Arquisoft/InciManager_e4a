@@ -1,4 +1,4 @@
-package test;
+package inciManager;
 
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -263,33 +263,6 @@ public class MainTest {
 	        List<String> locat = new ArrayList<String>();
 	        List<String> morinfo = new ArrayList<String>();
 	        locat.add("11.111111");locat.add("11.111111");locat.add("11.111111");
-	        morinfo.add("adInfo1");
-	        prop.put("key1","value1");
-	        prop.put("key2","value2");
-	        
-			payload.put("login", "13864928P");
-			payload.put("password", "123456");
-			payload.put("kind", "Person");
-			payload.put("name", "nombreIncidencia");
-			payload.put("description", "");
-			payload.put("location", locat);
-			payload.put("labels", "label1,label2");
-			payload.put("moreInfo", morinfo);
-	        payload.put("properties", prop);   
-	        mockMvc.perform(post("/notify")
-	                .content(this.json(payload))
-	                .contentType(JSONContentType))
-	                .andExpect(status().isNotFound());
-
-    }
-	
-	@Test
-    public void T09icorrectIncidenceLocation3() throws Exception {
-		 Map<String, Object> payload = new HashMap<>();
-	        Map<String, Object> prop = new HashMap<>();
-	        List<String> locat = new ArrayList<String>();
-	        List<String> morinfo = new ArrayList<String>();
-	        locat.add("Oviedo");locat.add("11.111111");
 	        morinfo.add("adInfo1");
 	        prop.put("key1","value1");
 	        prop.put("key2","value2");

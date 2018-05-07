@@ -1,5 +1,8 @@
 package asw.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,13 @@ public class IncidencesService {
 	
 	public Incidence addIncidence(Incidence incidencia) {
 		return incidenceRepository.save(incidencia);
+		
+	}
+	
+	public List<Incidence> getIncidences() {
+		List<Incidence> in = new ArrayList<Incidence>(); 
+		incidenceRepository.findAll().forEach(p -> in.add(p));
+		return in;
 		
 	}
 
