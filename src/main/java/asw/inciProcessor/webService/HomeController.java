@@ -9,20 +9,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import asw.agent.GetAgentInfo;
 import asw.dbManagement.entities.AgentPO;
 import asw.dbManagement.util.Assert;
-import asw.services.AgentsService;
 
 
 @Controller
 public class HomeController {
 	
 	@Autowired
-	AgentsService agentService;
+	GetAgentInfo agentService;
 	
 	@RequestMapping("/")
 	public String index(Model model) {
-		return "index";
+		return "login";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -35,15 +35,18 @@ public class HomeController {
 			Model model) {
 		Assert.isLoginEmpty(login);
 		Assert.isPasswordEmpty(password);
-		Assert.isKindEmpty(kind);
-
+		Assert.isKindEmpty(kind);		
+		
 		AgentPO agente = agentService.checkUserAndPass(login, password, kind);
 		if(agente == null) {
 			return "redirect:/login?error";
 		}
-
-		session.setAttribute("agent", agente);
-		
+		session.setAttribute("agent", agente);		
+		String direccion = (String)session.getAttribute("direccion");
+		if( direccion != "") {
+			System.out.println("Direccion: " + direccion);
+			return "redirect:/" + direccion;
+		}
 		return "index";
 	}
 }

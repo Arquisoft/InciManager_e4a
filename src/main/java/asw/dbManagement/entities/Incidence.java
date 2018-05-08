@@ -66,12 +66,17 @@ public class Incidence {
 		this(name, latLng);
 		this.setAgent(agent);
 	}
+	public Incidence(String agent, String nameIncidence, String descriptionIncidence) {
+		this.agent = agent;
+		this.inciName = nameIncidence;
+		this.inciDescription = descriptionIncidence;
+	}
+
 	public Incidence(String name, LatLong latLng, String agent, String description) {
 		this(name, latLng);
 		this.setAgent(agent);
 		this.setInciDescription(description);
 	}
-
 
 	public Incidence(String agent, String inciName, String inciDescription, LatLong location, Set<String> tags,
 			List<String> moreInfo, Map<String, Object> properties) {

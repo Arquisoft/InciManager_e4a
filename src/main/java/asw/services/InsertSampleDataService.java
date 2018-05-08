@@ -30,8 +30,8 @@ public class InsertSampleDataService {
 	@PostConstruct
 	public void init() {
 		
-		String agente1 = "13864928A"; 
-		String agente2 = "13864928B"; 
+		String agente1 = "87654321B"; 
+		String agente2 = "11223344C"; 
 		String agente3 = "13864928C"; 
 		String agente4 = "13864928D"; 
 		String agente5 = "13864928E"; 

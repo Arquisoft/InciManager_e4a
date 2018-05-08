@@ -1,4 +1,4 @@
-package asw.inciProcessor.webService;
+package asw.inciProcessor.webService.FollowIncidence;
 
 
 
@@ -11,12 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import asw.agent.GetAgentInfo;
 import asw.dbManagement.entities.AgentPO;
 import asw.dbManagement.entities.Incidence;
 import asw.dbManagement.entities.LatLong;
 import asw.dbManagement.entities.Notification;
 import asw.dbManagement.entities.Operator;
-import asw.services.AgentsService;
 import asw.services.IncidencesService;
 import asw.services.NotificationService;
 import asw.services.OperatorService;
@@ -30,7 +30,7 @@ public class SeguimientoController {
 	OperatorService operatorService;
 	
 	@Autowired
-	AgentsService agentService;
+	GetAgentInfo agentService;
 	
 	@Autowired
 	IncidencesService incidenceService;
@@ -41,13 +41,15 @@ public class SeguimientoController {
 	@RequestMapping("/seguimientoIncidencias")
 	public String seguimientoIncidencias(HttpSession session, Model model) {
 		AgentPO agente = (AgentPO) session.getAttribute("agent");
+		
 		if(agente == null) {
-			return "login";
+			session.setAttribute("direccion", "seguimientoIncidencias");
+			System.out.println(session.getAttribute("direccion"));
+			return "login";			
 		}
-		List<Notification> notificaciones = notificationService.getNotifications();
-		if(notificaciones == null) {
-			System.out.println("KE PAZÓ");
-			return "index";
+		List<Notification> notificaciones = notificationService.getNotifications(agente.id);
+		if(notificaciones == null) {			
+			return "seguimientoIncidencias";
 		}
 		model.addAttribute( "notifications" , notificaciones); 
 		return "seguimientoIncidencias";
