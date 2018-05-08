@@ -1,11 +1,11 @@
-package selenium.pageobjects;
+package inciManager.selenium.pageobjects;
 
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import selenium.util.SeleniumUtils;
+import inciManager.selenium.util.SeleniumUtils;
 
 
 public class PO_View {

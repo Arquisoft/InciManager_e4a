@@ -1,10 +1,10 @@
-package selenium.pageobjects;
+package inciManager.selenium.pageobjects;
 
 import static org.junit.Assert.assertTrue;
 import java.util.List;
 import org.openqa.selenium.*;
 
-import selenium.util.SeleniumUtils;
+import inciManager.selenium.util.SeleniumUtils;
 
 public class PO_NavView extends PO_View{
 	

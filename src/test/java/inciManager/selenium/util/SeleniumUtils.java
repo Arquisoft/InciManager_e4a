@@ -1,4 +1,4 @@
-package selenium.util;
+package inciManager.selenium.util;
 
 import java.util.List;
 

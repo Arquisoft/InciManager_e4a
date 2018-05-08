@@ -1,4 +1,4 @@
-package selenium.pageobjects;
+package inciManager.selenium.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
