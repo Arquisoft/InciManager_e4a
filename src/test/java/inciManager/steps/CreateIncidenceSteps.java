@@ -11,8 +11,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import asw.Application;
+import asw.agent.GetAgentInfo;
 import asw.dbManagement.entities.Incidence;
-import asw.services.AgentsService;
 import asw.services.IncidencesService;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -24,7 +24,7 @@ import cucumber.api.java.en.When;
 public class CreateIncidenceSteps {
 	
 	@Autowired
-	AgentsService agentservice;
+	GetAgentInfo agentservice;
 	@Autowired
 	IncidencesService incidenceservice;
 	

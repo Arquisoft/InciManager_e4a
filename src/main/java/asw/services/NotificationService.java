@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import asw.dbManagement.entities.AgentPO;
 import asw.dbManagement.entities.Notification;
 import asw.dbManagement.repositories.NotificationRepository;
 
@@ -19,9 +20,9 @@ public class NotificationService {
 		return notificationRepository.save(n1);		
 	}
 
-	public List<Notification> getNotifications() {
+	public List<Notification> getNotifications(String id) {
 		List<Notification> exit = new ArrayList<Notification>(); 
-		notificationRepository.findAll().forEach(p -> exit.add(p));
+		notificationRepository.findAll().forEach(p -> {if (p.getIncidencia().getAgent().equals(id)) exit.add(p); });
 		return exit;
 		
 	}

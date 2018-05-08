@@ -1,4 +1,4 @@
-package asw.inciProcessor.webService;
+package asw.inciProcessor.webService.NotifyIncidence;
 
 
 import java.util.HashSet;
@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import asw.Kafka.KafkaProducer;
+import asw.agent.GetAgentInfo;
 import asw.dbManagement.entities.AgentPO;
 import asw.dbManagement.entities.Incidence;
 import asw.dbManagement.entities.LatLong;
@@ -31,7 +32,6 @@ import asw.inciProcessor.webService.request.PeticionNotifyIncidenceREST;
 import asw.inciProcessor.webService.responses.RespuestaNotifyIncidenceREST;
 import asw.inciProcessor.webService.responses.errors.ErrorResponse;
 import asw.json.NotificationSerializer;
-import asw.services.AgentsService;
 import asw.services.IncidencesService;
 import asw.services.NotificationService;
 import asw.services.OperatorService;
@@ -47,7 +47,7 @@ public class NotifyIncidenceRESTController {
 	private KafkaProducer kafka;
 	
 	@Autowired
-	AgentsService agentService;
+	GetAgentInfo agentService;
 	
 		
 	@Autowired

@@ -29,7 +29,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import asw.Application;
-import asw.services.AgentsService;
+import asw.agent.GetAgentInfo;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -39,7 +39,7 @@ import asw.services.AgentsService;
 public class MainTest {
 	
 	@Autowired
-	private AgentsService agentService;
+	private GetAgentInfo agentService;
 
 	@Autowired
     private WebApplicationContext wac;

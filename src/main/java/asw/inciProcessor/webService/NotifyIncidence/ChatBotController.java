@@ -1,4 +1,4 @@
-package asw.inciProcessor.webService;
+package asw.inciProcessor.webService.NotifyIncidence;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,10 +21,11 @@ public class ChatBotController {
 	public String chatBot(HttpSession session, Model model) {		
 		AgentPO agente = (AgentPO) session.getAttribute("agent");
 		if(agente == null) {
-			return "login";
+			session.setAttribute("direccion", "chatbot");
+			return "login";			
 		}
 		chatbot.init(agente);
-		model.addAttribute("pregunta", chatbot.pregunta());
+		model.addAttribute("pregunta", chatbot.pregunta()[0]);
 		return "chatbot";
 	}
 	
@@ -33,13 +34,16 @@ public class ChatBotController {
 	public String respuestaChatbot(HttpSession session, @RequestParam String respuesta, Model model) {
 		AgentPO agente = (AgentPO) session.getAttribute("agent");
 		if(agente == null) {
+			session.setAttribute("direccion", "responderChatbot");
 			return "login";
 		}
 		if(!chatbot.responder(respuesta)) {
 			return "redirect:/chatbot?error";
 		}
 		if(chatbot.next()) {
-			model.addAttribute("pregunta", chatbot.pregunta());
+			String[] pregunta = chatbot.pregunta();			
+			model.addAttribute("pregunta", pregunta[0]);
+			model.addAttribute("aclaracion", pregunta[1]);
 			model.addAttribute("duplas", chatbot.getFrases());
 			return "chatbot";
 		}

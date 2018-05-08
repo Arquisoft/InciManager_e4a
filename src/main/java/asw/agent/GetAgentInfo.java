@@ -1,4 +1,4 @@
-package asw.services;
+package asw.agent;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
@@ -9,7 +9,7 @@ import asw.dbManagement.entities.AgentPO;
 import asw.dbManagement.entities.LoginPO;
 
 @Service
-public class AgentsService {
+public class GetAgentInfo {
 
 	public AgentPO checkUserAndPass(String user, String pass, String kind) {
 		final String uri = "http://ec2-54-149-62-135.us-west-2.compute.amazonaws.com:8081/user";
@@ -30,17 +30,8 @@ public class AgentsService {
 				System.out.println("No encontrado");
 
 			}
-		}catch (Exception e) {
-			e.printStackTrace();
-			found = new AgentPO();
-			found.email = "";
-			found.id = "";
-			found.kind = "";
-			found.kindCode = "";
-			found.location = "";
-			found.nombre = "";
 		}
-
+		
 		return found;
 	}
 

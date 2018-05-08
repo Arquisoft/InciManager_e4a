@@ -51,8 +51,10 @@ public class ChatbotService {
 	public boolean next() {
 		return numRes <= 6 ; 
 	}
-	public String pregunta() {		
-		String pregunta = preguntas.get(numRes);
+	public String[] pregunta() {		
+		String pregunta[] = new String[2];
+		pregunta[0] = preguntas.get(numRes);		
+		pregunta[1] = preguntas.getAclaracion(numRes);
 		numRes++; 
 		return pregunta; 
 	}
@@ -83,7 +85,7 @@ public class ChatbotService {
 			correct=Assert.responseChatbotEmpty(respuesta);
 		}
 		if(correct) {
-			frases.add(new Dupla(preguntas.get(numRes -1), respuesta));
+			frases.add(new Dupla(preguntas.get(numRes - 1), respuesta));
 			return true;
 		}
 		return false;	

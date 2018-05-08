@@ -38,6 +38,7 @@
         	<form class = "navbar-form" action = "/responderChatbot">
 				  <div class="form-group">
 				    <h2 th:text= "${pregunta}"></h2>
+				    <p th:text= "${aclaracion}"></p>
 				    <input th:if="${pregunta=='Introduzca propiedades adicionales de la incidencia.'}"
 				    	 type="text" name = "respuesta" class="form-control" placeholder="Inserte respuesta">
 				    <input th:if="${pregunta!='Introduzca propiedades adicionales de la incidencia.'}"
