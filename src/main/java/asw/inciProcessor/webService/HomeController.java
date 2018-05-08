@@ -21,12 +21,14 @@ public class HomeController {
 	GetAgentInfo agentService;
 	
 	@RequestMapping("/")
-	public String index(Model model) {
+	public String index(HttpSession session, Model model) {
+		session.setAttribute("direccion", "");
 		return "login";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(Model model) {
+	public String login(HttpSession session, Model model) {
+		session.setAttribute("direccion", "");
 		return "login";
 	}
 	

@@ -18,7 +18,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import asw.Application;
-import asw.agent.GetAgentInfo;
 import asw.dbManagement.entities.AgentPO;
 
 
@@ -28,32 +27,32 @@ import asw.dbManagement.entities.AgentPO;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MainControllerTest {
 
-  @Autowired
-  private WebApplicationContext context;
+	@Autowired
+	private WebApplicationContext context;
 
-  private MockMvc mvc;
-  
-  private MockHttpSession session;
-  
-  @Before
-  public void setUp() throws Exception {
-    mvc = MockMvcBuilders.webAppContextSetup(context).build();
-    session = new MockHttpSession();
-  }
- 
-  
-  @Test
+	private MockMvc mvc;
+
+	private MockHttpSession session;
+
+	@Before
+	public void setUp() throws Exception {
+		mvc = MockMvcBuilders.webAppContextSetup(context).build();
+		session = new MockHttpSession();
+	}
+
+
+	@Test
 	public void Test01ChatbotRedirectToLogin() throws Exception {
 		MockHttpServletRequestBuilder request = get("/chatbot").session(session);
 		mvc.perform(request).andExpect(view().name("login"));
 	}
-	
+
 	@Test
 	public void Test02Chatbot() throws Exception {
 		session.setAttribute("agent", new AgentPO());
 		MockHttpServletRequestBuilder request = get("/chatbot").session(session);
 		mvc.perform(request).andExpect(view().name("chatbot"));
 	}
-	
-  
+
+
 }

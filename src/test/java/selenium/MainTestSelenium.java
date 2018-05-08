@@ -18,7 +18,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import asw.Application;
 import selenium.pageobjects.PO_LoginView;
-import selenium.pageobjects.PO_NavView;
 import selenium.pageobjects.PO_View;
 import selenium.util.SeleniumUtils;
 
@@ -27,7 +26,7 @@ import selenium.util.SeleniumUtils;
 // @WebAppConfiguration
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MainTestSelenium {
-	
+
 	private static WebDriver driver;
 	static String URL;
 
@@ -51,57 +50,46 @@ public class MainTestSelenium {
 	static public void end() {
 		driver.quit();
 	}
-	
+
 	@Test
 	public void PR01IndexView() {
-		PO_View.checkElement(driver, "text", "Bienvenido");
+		PO_View.checkElement(driver, "text", "Login");
 	}
-	
+
 	@Test
 	public void PR02ChatbotNotLogged() {
-		PO_View.checkElement(driver, "text", "Bienvenido");
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'chatbot')]/a");
-		elementos.get(0).click();
+		driver.navigate().to(URL+"/chatbot");
 		PO_View.checkElement(driver, "text", "Login");
 	}
-	
+
 	@Test
 	public void PR03SeguimientoIncidenciasNotLogged() {
-		PO_View.checkElement(driver, "text", "Bienvenido");
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'chatbot')]/a");
-		elementos.get(0).click();
+		driver.navigate().to(URL+"/seguimientoIncidencias");
 		PO_View.checkElement(driver, "text", "Login");
 	}
-	
+
 	@Test
 	public void PR04Login() {
-		PO_View.checkElement(driver, "text", "Bienvenido");
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'chatbot')]/a");
-		elementos.get(0).click();
+		driver.navigate().to(URL+"/login");
 		PO_View.checkElement(driver, "text", "Login");
 		PO_LoginView.fillForm(driver, "13864928P", "123456","Kind");
 		PO_View.checkElement(driver, "text", "Bienvenido");
 	}
-	
+
 	@Test
 	public void PR05Chatbot() {
-		PO_View.checkElement(driver, "text", "Bienvenido");
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'chatbot')]/a");
-		elementos.get(0).click();
+		driver.navigate().to(URL+"/login");
 		PO_View.checkElement(driver, "text", "Login");
 		PO_LoginView.fillForm(driver, "13864928P", "123456","Kind");
 		PO_View.checkElement(driver, "text", "Bienvenido");
-		List<WebElement> elementos2 = SeleniumUtils.EsperaCargaPagina(driver, "free",
-				"//li[contains(@id,'chatbot')]/a", PO_View.getTimeout());
-		elementos2.get(0).click();
-		PO_View.checkElement(driver, "text", "Chatbot");
-	}
-	
-	@Test
-	public void PR06SeguimientoIncidencias() {
-		PO_View.checkElement(driver, "text", "Bienvenido");
 		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'chatbot')]/a");
 		elementos.get(0).click();
+		PO_View.checkElement(driver, "text", "Chatbot");
+	}
+
+	@Test
+	public void PR06SeguimientoIncidencias() {
+		driver.navigate().to(URL+"/login");
 		PO_View.checkElement(driver, "text", "Login");
 		PO_LoginView.fillForm(driver, "13864928P", "123456","Kind");
 		PO_View.checkElement(driver, "text", "Bienvenido");
