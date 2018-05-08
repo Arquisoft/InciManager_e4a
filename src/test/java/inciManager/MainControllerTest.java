@@ -52,6 +52,53 @@ public class MainControllerTest {
 		session.setAttribute("agent", new AgentPO());
 		MockHttpServletRequestBuilder request = get("/chatbot").session(session);
 		mvc.perform(request).andExpect(view().name("chatbot"));
+		session.setAttribute("agent", null);
+	}
+	
+	@Test
+	public void Test03SeguimientoIncidenciasRedirectToLogin() throws Exception {
+		MockHttpServletRequestBuilder request = get("/seguimientoIncidencias").session(session);
+		mvc.perform(request).andExpect(view().name("login"));
+	}
+
+	@Test
+	public void Test04SeguimientoIncidencias() throws Exception {
+		session.setAttribute("agent", new AgentPO());
+		MockHttpServletRequestBuilder request = get("/seguimientoIncidencias").session(session);
+		mvc.perform(request).andExpect(view().name("seguimientoIncidencias"));
+		session.setAttribute("agent", null);
+	}
+	
+	@Test
+	public void Test05IndexRedirectToLogin() throws Exception {
+		MockHttpServletRequestBuilder request = get("/").session(session);
+		mvc.perform(request).andExpect(view().name("login"));
+	}
+	
+	@Test
+	public void Test06Index() throws Exception {
+		session.setAttribute("agent", new AgentPO());
+		MockHttpServletRequestBuilder request = get("/").session(session);
+		mvc.perform(request).andExpect(view().name("index"));
+	}
+	
+	@Test
+	public void Test07Logout() throws Exception {
+		MockHttpServletRequestBuilder request = get("/logout").session(session);
+		mvc.perform(request).andExpect(view().name("redirect:/"));
+	}
+	
+	@Test
+	public void Test08ResponderRedirectToLogin() throws Exception {
+		MockHttpServletRequestBuilder request = get("/responderChatbot?respuesta=name").session(session);
+		mvc.perform(request).andExpect(view().name("login"));
+	}
+	
+	@Test
+	public void Test09Responder() throws Exception {
+		session.setAttribute("agent", new AgentPO());
+		MockHttpServletRequestBuilder request = get("/responderChatbot?respuesta=desname").session(session);
+		mvc.perform(request).andExpect(view().name("chatbot"));
 	}
 
 

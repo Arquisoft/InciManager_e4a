@@ -305,7 +305,212 @@ public class MainTest {
 				.contentType(JSONContentType)) 
 		.andExpect(status().isNotFound()); 
 
-	} 
+	}
+	
+	@Test
+	public void T10emptyIncidenceLabel() throws Exception {
+		Map<String, Object> payload = new HashMap<>();
+		Map<String, Object> prop = new HashMap<>();
+		List<String> locat = new ArrayList<String>();
+		List<String> morinfo = new ArrayList<String>();
+		locat.add("11.111111");locat.add("11.111111");
+		morinfo.add("adInfo1");
+		prop.put("key1","value1");
+		prop.put("key2","value2");
+
+		payload.put("login", "13864928P");
+		payload.put("password", "123456");
+		payload.put("kind", "Person");
+		payload.put("name", "nombreIncidencia");
+		payload.put("description", "descripcion de la incidencia");
+		payload.put("location", locat);
+		payload.put("labels", "");
+		payload.put("moreInfo", morinfo);
+		payload.put("properties", prop);   
+		mockMvc.perform(post("/notify")
+				.content(this.json(payload))
+				.contentType(JSONContentType))
+		.andExpect(status().isNotFound());
+	}
+	
+	@Test
+	public void T11incorrectIncidenceLabel() throws Exception {
+		Map<String, Object> payload = new HashMap<>();
+		Map<String, Object> prop = new HashMap<>();
+		List<String> locat = new ArrayList<String>();
+		List<String> morinfo = new ArrayList<String>();
+		locat.add("11.111111");locat.add("11.111111");
+		morinfo.add("adInfo1");
+		prop.put("key1","value1");
+		prop.put("key2","value2");
+
+		payload.put("login", "13864928P");
+		payload.put("password", "123456");
+		payload.put("kind", "Person");
+		payload.put("name", "nombreIncidencia");
+		payload.put("description", "descripcion de la incidencia");
+		payload.put("location", locat);
+		payload.put("labels", ",label");
+		payload.put("moreInfo", morinfo);
+		payload.put("properties", prop);   
+		mockMvc.perform(post("/notify")
+				.content(this.json(payload))
+				.contentType(JSONContentType))
+		.andExpect(status().isNotFound());
+	}
+	
+	@Test
+	public void T12emptyIncidenceInfo() throws Exception {
+		Map<String, Object> payload = new HashMap<>();
+		Map<String, Object> prop = new HashMap<>();
+		List<String> locat = new ArrayList<String>();
+		List<String> morinfo = new ArrayList<String>();
+		locat.add("11.111111");locat.add("11.111111");
+		prop.put("key1","value1");
+		prop.put("key2","value2");
+
+		payload.put("login", "13864928P");
+		payload.put("password", "123456");
+		payload.put("kind", "Person");
+		payload.put("name", "nombreIncidencia");
+		payload.put("description", "descripcion de la incidencia");
+		payload.put("location", locat);
+		payload.put("labels", ",label");
+		payload.put("moreInfo",morinfo );
+		payload.put("properties", prop);   
+		mockMvc.perform(post("/notify")
+				.content(this.json(payload))
+				.contentType(JSONContentType))
+		.andExpect(status().isNotFound());
+	}
+	
+	@Test
+	public void T13incorrectIncidenceInfo() throws Exception {
+		Map<String, Object> payload = new HashMap<>();
+		Map<String, Object> prop = new HashMap<>();
+		List<String> locat = new ArrayList<String>();
+		List<String> morinfo = new ArrayList<String>();
+		locat.add("11.111111");locat.add("11.111111");
+		morinfo.add("adInfo1");	morinfo.add(null);
+		prop.put("key1","value1");
+		prop.put("key2","value2");
+
+		payload.put("login", "13864928P");
+		payload.put("password", "123456");
+		payload.put("kind", "Person");
+		payload.put("name", "nombreIncidencia");
+		payload.put("description", "descripcion de la incidencia");
+		payload.put("location", locat);
+		payload.put("labels", ",label");
+		payload.put("moreInfo",morinfo );
+		payload.put("properties", prop);   
+		mockMvc.perform(post("/notify")
+				.content(this.json(payload))
+				.contentType(JSONContentType))
+		.andExpect(status().isNotFound());
+	}
+	
+	@Test
+	public void T14incorrectIncidenceInfo2() throws Exception {
+		Map<String, Object> payload = new HashMap<>();
+		Map<String, Object> prop = new HashMap<>();
+		List<String> locat = new ArrayList<String>();
+		List<String> morinfo = new ArrayList<String>();
+		locat.add("11.111111");locat.add("11.111111");
+		morinfo.add("adInfo1");	morinfo.add("");
+		prop.put("key1","value1");
+		prop.put("key2","value2");
+
+		payload.put("login", "13864928P");
+		payload.put("password", "123456");
+		payload.put("kind", "Person");
+		payload.put("name", "nombreIncidencia");
+		payload.put("description", "descripcion de la incidencia");
+		payload.put("location", locat);
+		payload.put("labels", ",label");
+		payload.put("moreInfo",morinfo );
+		payload.put("properties", prop);   
+		mockMvc.perform(post("/notify")
+				.content(this.json(payload))
+				.contentType(JSONContentType))
+		.andExpect(status().isNotFound());
+	}
+	
+	@Test
+	public void T15emptyIncidenceProperties() throws Exception {
+		Map<String, Object> payload = new HashMap<>();
+		Map<String, Object> prop = new HashMap<>();
+		List<String> locat = new ArrayList<String>();
+		List<String> morinfo = new ArrayList<String>();
+		locat.add("11.111111");locat.add("11.111111");
+		morinfo.add("adInfo1");	morinfo.add("adInfo2");
+		prop.put("","");
+		prop.put("","");
+
+		payload.put("login", "13864928P");
+		payload.put("password", "123456");
+		payload.put("kind", "Person");
+		payload.put("name", "nombreIncidencia");
+		payload.put("description", "descripcion de la incidencia");
+		payload.put("location", locat);
+		payload.put("labels", ",label");
+		payload.put("moreInfo",morinfo );
+		payload.put("properties", prop);   
+		mockMvc.perform(post("/notify")
+				.content(this.json(payload))
+				.contentType(JSONContentType))
+		.andExpect(status().isNotFound());
+	}
+	
+	@Test
+	public void T16incorrectIncidenceProperties() throws Exception {
+		Map<String, Object> payload = new HashMap<>();
+		Map<String, Object> prop = new HashMap<>();
+		List<String> locat = new ArrayList<String>();
+		List<String> morinfo = new ArrayList<String>();
+		locat.add("11.111111");locat.add("11.111111");
+		morinfo.add("adInfo1");	morinfo.add("adInfo2");
+		prop.put("prop1","");
+		prop.put("prp2","");
+
+		payload.put("login", "13864928P");
+		payload.put("password", "123456");
+		payload.put("kind", "Person");
+		payload.put("name", "nombreIncidencia");
+		payload.put("description", "descripcion de la incidencia");
+		payload.put("location", locat);
+		payload.put("labels", ",label");
+		payload.put("moreInfo",morinfo );
+		payload.put("properties", prop);   
+		mockMvc.perform(post("/notify")
+				.content(this.json(payload))
+				.contentType(JSONContentType))
+		.andExpect(status().isNotFound());
+	}
+	
+	@Test
+	public void T17incorrectIncidenceProperties2() throws Exception {
+		Map<String, Object> payload = new HashMap<>();
+		Map<String, Object> prop = new HashMap<>();
+		List<String> locat = new ArrayList<String>();
+		List<String> morinfo = new ArrayList<String>();
+		locat.add("11.111111");locat.add("11.111111");
+		morinfo.add("adInfo1");	morinfo.add("adInfo2");
+
+		payload.put("login", "13864928P");
+		payload.put("password", "123456");
+		payload.put("kind", "Person");
+		payload.put("name", "nombreIncidencia");
+		payload.put("description", "descripcion de la incidencia");
+		payload.put("location", locat);
+		payload.put("labels", ",label");
+		payload.put("moreInfo",morinfo );
+		payload.put("properties", prop);   
+		mockMvc.perform(post("/notify")
+				.content(this.json(payload))
+				.contentType(JSONContentType))
+		.andExpect(status().isNotFound());
+	}
 
 	/**
 	 * Transforma un objeto en un string JSON

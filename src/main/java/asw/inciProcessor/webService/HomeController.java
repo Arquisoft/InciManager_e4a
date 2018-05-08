@@ -22,8 +22,12 @@ public class HomeController {
 	
 	@RequestMapping("/")
 	public String index(HttpSession session, Model model) {
-		session.setAttribute("direccion", "");
-		return "login";
+		AgentPO agente = (AgentPO) session.getAttribute("agent");
+		if(agente == null) {
+			session.setAttribute("direccion", "");
+			return "login";
+		}
+		return "index";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
